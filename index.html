@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio – ZxeDev</title>
+  <meta name="description" content="Portfolio of a Roblox developer – scripting, UI/UX and optimization." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://image.noelshack.com/fichiers/2025/46/3/1762948017-70ac2cbe2638cb574e992c802a2265ca.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#050507;
+      --bg-2:#0d0d0f;
+      --glass:#0e0b0baa;
+      --text:#f0e8e8;
+      --text-dim:#a89090;
+      --primary:#e03030;
+      --primary-2:#c01818;
+      --accent:#ff5555;
+      --green:#36c288;
+      --danger:#f36a6a;
+      --chip:#1a0f0f;
+      --card-stroke:#5e2222;
+      --radius-xl:24px;
+      --radius-lg:18px;
+      --radius-md:14px;
+      --shadow: 0 20px 60px rgba(0,0,0,.6);
+      --discord:#5865F2;
+      --discord-dark:#404EED;
+      --discord-glow: rgba(88,101,242,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 70% -20%, #1a0505 0%, transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, #1a0000 0%, transparent 50%),
+        var(--bg-1);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+      line-height:1.5; overflow-x:hidden;
+    }
+    body:before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,80,80,.18) 40%, transparent 41%),
+        radial-gradient(2px 2px at 80% 10%, rgba(255,80,80,.13) 40%, transparent 41%),
+        radial-gradient(2px 2px at 60% 80%, rgba(255,80,80,.09) 40%, transparent 41%),
+        radial-gradient(1.5px 1.5px at 40% 60%, rgba(255,80,80,.09) 40%, transparent 41%);
+      background-repeat:no-repeat;
+    }
+    body:after{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,.012) 2px, rgba(255,0,0,.012) 4px);
+    }
+
+    /* INTRO */
+    .intro{
+      position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
+      background:linear-gradient(180deg, rgba(5,2,2,.98), rgba(5,2,2,.93));
+      animation: introFade 2.8s ease 0.6s forwards;
+      backdrop-filter: blur(6px);
+    }
+    @keyframes introFade{ 60%{opacity:1} 100%{opacity:0; pointer-events:none; visibility:hidden} }
+    .intro h1{ font: 900 clamp(30px,6vw,64px)/1 Poppins, Inter, sans-serif; letter-spacing:.5px; margin:0; }
+    .intro h1 .gradient{ background: linear-gradient(90deg,var(--accent),#ff2222); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .typewriter{ overflow:hidden; white-space:nowrap; border-right: .12em solid var(--primary); width:0; animation: typing 1.8s steps(30,end) forwards, blink .9s step-end infinite; }
+    @keyframes typing{ to{ width:100% } }
+    @keyframes blink{ 50%{ border-color:transparent } }
+
+    .container{ width:min(1150px, 92vw); margin:0 auto; position:relative; z-index:1; }
+
+    /* NAV */
+    header.nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(180%) blur(8px);
+      background:linear-gradient(180deg, rgba(5,2,2,.88), rgba(5,2,2,.55));
+      border-bottom:1px solid rgba(200,50,50,.2);
+    }
+    .nav .row{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:12px; flex-wrap:wrap; }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px; }
+    .badge-dot{ width:10px; height:10px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); }
+    nav a{ color:var(--text-dim); text-decoration:none; margin:0 7px; font-weight:600; transition:color .2s; font-size:13.5px; }
+    nav a:hover{ color:var(--accent); }
+
+    /* AUTH NAV BUTTONS */
+    .nav-auth{ display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .btn-nav{
+      display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:10px;
+      font-weight:700; font-size:13px; cursor:pointer; border:none; transition:filter .2s, transform .2s;
+      text-decoration:none;
+    }
+    .btn-nav.login{ background:transparent; color:var(--text-dim); border:1px solid rgba(200,50,50,.3); }
+    .btn-nav.login:hover{ color:var(--text); border-color:rgba(200,50,50,.6); }
+    .btn-nav.register{ background:linear-gradient(90deg,var(--primary),#8b0000); color:#f5e0e0; border:1px solid rgba(255,80,80,.28); }
+    .btn-nav.register:hover{ filter:brightness(1.15); transform:translateY(-1px); }
+    .btn-nav.messages{ background:linear-gradient(90deg,var(--discord),var(--discord-dark)); color:#fff; border:1px solid rgba(88,101,242,.4); position:relative; }
+    .btn-nav.messages .notif-badge{ position:absolute; top:-5px; right:-5px; background:#e03030; color:#fff; font-size:10px; font-weight:800; border-radius:50%; width:18px; height:18px; display:grid; place-items:center; border:2px solid var(--bg-1); }
+    .user-chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; background:var(--chip); border:1px solid rgba(200,50,50,.3); font-weight:700; font-size:13px; cursor:pointer; }
+    .user-chip .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); }
+    .user-chip .admin-crown{ color:#faa61a; font-size:14px; }
+
+    /* MODAL OVERLAY */
+    .modal-overlay{
+      position:fixed; inset:0; z-index:9000; background:rgba(0,0,0,.75);
+      backdrop-filter:blur(8px); display:grid; place-items:center;
+      opacity:0; pointer-events:none; transition:opacity .25s;
+    }
+    .modal-overlay.open{ opacity:1; pointer-events:all; }
+    .modal{
+      background:linear-gradient(160deg, #120808, #0d0505);
+      border:1px solid rgba(200,50,50,.35); border-radius:24px; padding:32px;
+      width:min(440px, 92vw); position:relative;
+      box-shadow: var(--shadow), 0 0 60px rgba(180,0,0,.2);
+      transform:translateY(20px) scale(.97); transition:transform .25s;
+    }
+    .modal-overlay.open .modal{ transform:translateY(0) scale(1); }
+    .modal-close{ position:absolute; top:16px; right:16px; background:none; border:none; color:var(--text-dim); font-size:22px; cursor:pointer; line-height:1; padding:4px 8px; border-radius:8px; transition:color .2s,background .2s; }
+    .modal-close:hover{ color:var(--accent); background:rgba(255,80,80,.1); }
+    .modal h2{ margin:0 0 6px; font:800 22px/1.2 Poppins,Inter,sans-serif; }
+    .modal p.sub{ margin:0 0 24px; color:var(--text-dim); font-size:14px; }
+    .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+    .field label{ font-weight:700; font-size:13px; color:var(--text-dim); }
+    .field input{ padding:12px 14px; border-radius:12px; background:#0e0505; border:1px solid rgba(200,50,50,.28); color:var(--text); outline:none; transition:border-color .2s; font-size:14px; }
+    .field input:focus{ border-color:rgba(220,50,50,.6); }
+    .modal-error{ background:rgba(243,106,106,.1); border:1px solid rgba(243,106,106,.3); color:var(--danger); border-radius:10px; padding:10px 14px; font-size:13px; font-weight:700; margin-bottom:16px; display:none; }
+    .modal-error.show{ display:block; }
+    .modal-success{ background:rgba(54,194,136,.1); border:1px solid rgba(54,194,136,.3); color:var(--green); border-radius:10px; padding:10px 14px; font-size:13px; font-weight:700; margin-bottom:16px; display:none; }
+    .modal-success.show{ display:block; }
+    .modal-switch{ text-align:center; margin-top:16px; font-size:13px; color:var(--text-dim); }
+    .modal-switch a{ color:var(--accent); font-weight:700; cursor:pointer; text-decoration:none; }
+    .modal-switch a:hover{ text-decoration:underline; }
+    .tab-row{ display:flex; gap:4px; margin-bottom:24px; background:rgba(255,255,255,.04); border-radius:12px; padding:4px; }
+    .tab-btn{ flex:1; padding:9px; border-radius:9px; border:none; background:transparent; color:var(--text-dim); font-weight:700; font-size:13px; cursor:pointer; transition:background .2s,color .2s; }
+    .tab-btn.active{ background:linear-gradient(90deg,var(--primary),#8b0000); color:#fff; }
+
+    /* MESSAGES PAGE */
+    #page-messages{
+      display:none; position:fixed; inset:0; z-index:200; overflow-y:auto;
+      background:
+        radial-gradient(1200px 600px at 70% -20%, #1a0505 0%, transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, #1a0000 0%, transparent 50%),
+        var(--bg-1);
+    }
+    #page-messages.open{ display:block; }
+    .msg-page-header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:blur(10px); background:rgba(5,2,2,.88);
+      border-bottom:1px solid rgba(200,50,50,.2); padding:14px 0;
+    }
+    .msg-page-header .row{ display:flex; align-items:center; justify-content:space-between; }
+    .msg-page-header h1{ margin:0; font:800 20px/1 Poppins,Inter,sans-serif; }
+    .msg-back{ display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:10px; background:transparent; border:1px solid rgba(200,50,50,.3); color:var(--text-dim); font-weight:700; font-size:13px; cursor:pointer; transition:color .2s,border-color .2s; }
+    .msg-back:hover{ color:var(--text); border-color:rgba(200,50,50,.6); }
+    .msg-layout{ display:grid; grid-template-columns:320px 1fr; gap:0; height:calc(100vh - 61px); }
+    .msg-sidebar{
+      border-right:1px solid rgba(200,50,50,.15); overflow-y:auto;
+      background:rgba(8,3,3,.5);
+    }
+    .msg-sidebar-header{ padding:16px 16px 12px; border-bottom:1px solid rgba(200,50,50,.12); }
+    .msg-sidebar-header h3{ margin:0 0 4px; font:700 15px/1 Poppins,Inter,sans-serif; }
+    .msg-sidebar-header p{ margin:0; color:var(--text-dim); font-size:12px; }
+    .thread-list{ padding:8px; }
+    .thread-item{
+      padding:12px 12px; border-radius:12px; cursor:pointer;
+      border:1px solid transparent; margin-bottom:4px;
+      transition:background .2s, border-color .2s;
+      display:flex; align-items:flex-start; gap:10px;
+    }
+    .thread-item:hover{ background:rgba(200,50,50,.07); }
+    .thread-item.active{ background:rgba(200,50,50,.1); border-color:rgba(200,50,50,.25); }
+    .thread-item.unread .thread-name{ color:var(--text); }
+    .thread-item.unread::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:5px; }
+    .thread-avatar{ width:38px; height:38px; border-radius:11px; background:linear-gradient(135deg,#3a1010,#1a0505); border:1px solid rgba(200,50,50,.2); display:grid; place-items:center; flex-shrink:0; font-weight:800; font-size:14px; color:var(--accent); }
+    .thread-info{ flex:1; min-width:0; }
+    .thread-name{ font-weight:700; font-size:13px; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .thread-preview{ font-size:12px; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:.7; margin-top:2px; }
+    .thread-time{ font-size:11px; color:var(--text-dim); opacity:.5; flex-shrink:0; margin-top:2px; }
+    .msg-main{ display:flex; flex-direction:column; overflow:hidden; }
+    .msg-top-bar{ padding:14px 20px; border-bottom:1px solid rgba(200,50,50,.12); display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    .msg-top-bar .t-avatar{ width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,#3a1010,#1a0505); border:1px solid rgba(200,50,50,.2); display:grid; place-items:center; font-weight:800; font-size:15px; color:var(--accent); }
+    .msg-top-bar .t-name{ font-weight:800; font-size:15px; }
+    .msg-top-bar .t-sub{ font-size:12px; color:var(--text-dim); }
+    .msg-body{ flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:12px; }
+    .msg-empty{ display:grid; place-items:center; height:100%; text-align:center; color:var(--text-dim); }
+    .msg-empty svg{ opacity:.2; margin-bottom:16px; }
+    .msg-empty p{ margin:0; font-size:15px; }
+    .bubble-wrap{ display:flex; align-items:flex-end; gap:8px; }
+    .bubble-wrap.me{ flex-direction:row-reverse; }
+    .bubble-avatar{ width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#3a1010,#1a0505); border:1px solid rgba(200,50,50,.2); display:grid; place-items:center; font-weight:800; font-size:12px; color:var(--accent); flex-shrink:0; }
+    .bubble-avatar.admin{ background:linear-gradient(135deg,#2a0505,#5a0000); color:#faa61a; border-color:rgba(250,166,26,.25); }
+    .bubble{
+      max-width:70%; padding:11px 14px; border-radius:16px; font-size:14px; line-height:1.55;
+      background:rgba(180,20,20,.1); border:1px solid rgba(200,50,50,.18); color:var(--text);
+    }
+    .bubble.me{ background:linear-gradient(135deg,rgba(224,48,48,.18),rgba(180,20,20,.1)); border-color:rgba(220,50,50,.3); }
+    .bubble.admin-bubble{ background:linear-gradient(135deg,rgba(250,166,26,.1),rgba(200,100,0,.06)); border-color:rgba(250,166,26,.22); }
+    .bubble-meta{ font-size:11px; color:var(--text-dim); opacity:.6; margin-top:4px; }
+    .bubble-wrap.me .bubble-meta{ text-align:right; }
+    .msg-input-area{ padding:16px 20px; border-top:1px solid rgba(200,50,50,.12); display:flex; gap:10px; flex-shrink:0; }
+    .msg-input-area textarea{ flex:1; padding:12px 14px; border-radius:12px; background:#0e0505; border:1px solid rgba(200,50,50,.28); color:var(--text); outline:none; resize:none; font-family:inherit; font-size:14px; line-height:1.5; transition:border-color .2s; min-height:48px; max-height:120px; }
+    .msg-input-area textarea:focus{ border-color:rgba(220,50,50,.6); }
+    .msg-send-btn{ padding:12px 20px; border-radius:12px; background:linear-gradient(90deg,var(--primary),#8b0000); color:#f5e0e0; border:1px solid rgba(255,80,80,.28); font-weight:800; font-size:14px; cursor:pointer; transition:filter .2s,transform .2s; white-space:nowrap; align-self:flex-end; }
+    .msg-send-btn:hover{ filter:brightness(1.15); transform:translateY(-1px); }
+    .no-thread-selected{ display:grid; place-items:center; color:var(--text-dim); text-align:center; }
+    .no-thread-selected svg{ opacity:.15; margin-bottom:20px; }
+    .no-thread-selected p{ margin:0 0 6px; font-size:16px; font-weight:700; color:var(--text); }
+    .no-thread-selected span{ font-size:14px; }
+    .admin-badge{ display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:999px; font-size:11px; font-weight:800; background:linear-gradient(90deg,#7a4a00,#4a2d00); border:1px solid rgba(250,166,26,.3); color:#faa61a; }
+    .new-msg-btn{ width:100%; padding:12px; border-radius:12px; background:linear-gradient(90deg,rgba(200,50,50,.12),rgba(200,50,50,.06)); border:1px dashed rgba(200,50,50,.3); color:var(--accent); font-weight:700; font-size:13px; cursor:pointer; transition:background .2s,border-color .2s; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:8px; }
+    .new-msg-btn:hover{ background:rgba(200,50,50,.18); border-color:rgba(200,50,50,.5); }
+    .msg-login-gate{ display:grid; place-items:center; height:calc(100vh - 61px); text-align:center; color:var(--text-dim); }
+    .msg-login-gate svg{ opacity:.2; margin-bottom:20px; }
+    .msg-login-gate h2{ margin:0 0 8px; color:var(--text); font:800 24px/1 Poppins,Inter,sans-serif; }
+    .msg-login-gate p{ margin:0 0 24px; }
+
+    /* NEW MESSAGE MODAL */
+    #modal-new-msg .modal{ width:min(520px,92vw); }
+
+    /* HERO */
+    .hero{ padding: clamp(42px, 6vw, 72px) 0 40px; text-align:center; }
+    .hero h1{ font: 900 clamp(30px,8vw,68px)/1.1 Poppins, Inter, sans-serif; margin:.1em 0 .3em; letter-spacing:.3px; }
+    .hero h1 em{ font-style:normal; background:linear-gradient(90deg, var(--accent) 0%, #ff2222 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+    /* AVAILABLE BADGE */
+    .available-badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 18px; border-radius:999px;
+      background: linear-gradient(90deg, rgba(54,194,136,.14), rgba(54,194,136,.06));
+      border:1px solid rgba(54,194,136,.35);
+      color:var(--green); font-weight:800; font-size:13px;
+      margin-bottom:18px;
+    }
+    .dot-pulse{
+      width:8px; height:8px; border-radius:50%; background:var(--green);
+      box-shadow:0 0 0 0 rgba(54,194,136,.6);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot{
+      0%{ box-shadow:0 0 0 0 rgba(54,194,136,.6); }
+      70%{ box-shadow:0 0 0 8px rgba(54,194,136,0); }
+      100%{ box-shadow:0 0 0 0 rgba(54,194,136,0); }
+    }
+
+    /* PROFILE */
+    .profile{
+      margin:26px auto 18px; width:min(860px, 100%);
+      background: linear-gradient(180deg, rgba(180,20,20,.08), rgba(180,20,20,.03));
+      border:1px solid rgba(200,50,50,.22); border-radius:20px; padding:18px;
+      display:flex; align-items:center; gap:18px; box-shadow: var(--shadow), 0 0 40px rgba(180,0,0,.12);
+      position:relative;
+    }
+    .profile:before{
+      content:""; position:absolute; inset:-1px; border-radius:20px; padding:1px;
+      background:linear-gradient(135deg, rgba(220,50,50,.6), rgba(140,10,10,.5));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .avatar{ flex:0 0 92px; width:92px; height:92px; border-radius:20px; overflow:hidden; background: radial-gradient(65% 65% at 30% 30%, #ff3333, #7a0000); border:1px solid rgba(255,80,80,.2); }
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.1); }
+    .p-col{ flex:1 1 auto; text-align:left; }
+    .p-top{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+    .name{ font:800 28px/1 Poppins, Inter, sans-serif; }
+    .verified{
+      display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px;
+      background:linear-gradient(90deg,var(--primary),#a00000);
+      color:#f5e0e0; font-weight:800; font-size:13px;
+    }
+    .verified svg{ width:18px; height:18px; }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      background:var(--chip); color:var(--text);
+      border:1px solid rgba(200,50,50,.28); font-weight:600; font-size:13px;
+    }
+    .chip .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); }
+    .chip-discord{ cursor:pointer; transition: border-color .2s, background .2s; position:relative; }
+    .chip-discord:hover{ border-color:rgba(88,101,242,.5); background:rgba(88,101,242,.12); }
+    .chip-discord .copy-icon{ opacity:.55; transition:opacity .2s; }
+    .chip-discord:hover .copy-icon{ opacity:1; }
+    .copy-toast{ position:absolute; top:-34px; left:50%; transform:translateX(-50%); background:#12121e; border:1px solid rgba(88,101,242,.4); color:#a0aaff; font-size:11px; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .25s; }
+    .chip-discord.copied .copy-toast{ opacity:1; }
+    .about{ margin: 14px auto 26px; width:min(900px, 100%); color:var(--text-dim); font-size:clamp(15px, 2vw, 18px); }
+    .about b{ color:var(--text); }
+    .about em{ font-style:normal; color:var(--accent); font-weight:700; }
+    .last-online{ display:inline-flex; align-items:center; gap:7px; padding:5px 12px; border-radius:999px; font-size:12px; font-weight:700; background:rgba(88,101,242,.1); border:1px solid rgba(88,101,242,.22); color:#a0aaff; margin-top:6px; }
+    .last-online .dc-dot{ width:7px; height:7px; border-radius:50%; background:#36c288; box-shadow:0 0 5px #36c288; flex-shrink:0; }
+
+    /* CTA CARDS */
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:16px; }
+    .card{
+      grid-column: span 6;
+      background: linear-gradient(180deg, rgba(180,20,20,.07), rgba(180,20,20,.03));
+      border:1px solid rgba(200,50,50,.2); border-radius:20px; padding:20px;
+      box-shadow: var(--shadow); position:relative; overflow:hidden;
+    }
+    .card:after{
+      content:""; position:absolute; right:-60px; bottom:-60px; width:220px; height:220px;
+      background: radial-gradient(closest-side, rgba(200,30,30,.35), transparent 70%); filter:blur(10px);
+    }
+    .card h3{ margin:0 0 8px; font:700 clamp(18px,2.2vw,22px)/1.2 Inter, sans-serif; }
+    .card p{ margin:0 0 14px; color:var(--text-dim); }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px;
+      background: linear-gradient(90deg, var(--primary) 0%, #8b0000 100%);
+      color:#f5e0e0; text-decoration:none; font-weight:800;
+      border:1px solid rgba(255,80,80,.28); cursor:pointer;
+      transition: filter .2s, transform .2s;
+    }
+    .btn.secondary{ background:transparent; color:var(--text); border:1px solid rgba(200,50,50,.35); }
+    .btn.discord-btn{ background: linear-gradient(90deg, var(--discord) 0%, var(--discord-dark) 100%); border:1px solid rgba(88,101,242,.45); color:#fff; }
+    .btn:hover{ filter: brightness(1.15); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section{ padding:64px 0; }
+    section h2{ text-align:center; font:800 clamp(22px,4vw,34px)/1.15 Poppins, Inter, sans-serif; margin:0 0 22px; }
+    .pill-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:22px; }
+    .cards-3{ display:grid; grid-template-columns: repeat(12,1fr); gap:16px; }
+    .game{ grid-column: span 4; background: linear-gradient(180deg, rgba(180,20,20,.06), rgba(180,20,20,.02)); border:1px solid rgba(200,50,50,.18); border-radius:18px; overflow:hidden; transition:transform .2s ease, box-shadow .2s ease; }
+    .game:hover{ transform: translateY(-3px); box-shadow: 0 0 28px rgba(200,30,30,.2); }
+    .thumb{ aspect-ratio: 16/9; background:linear-gradient(135deg, #1a0505, #200a0a); }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .game .body{ padding:14px 14px 16px; }
+    .meta{ display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+    .meta .tag{ background:var(--chip); color:var(--text); border:1px solid rgba(200,50,50,.25); padding:6px 10px; font-weight:600; border-radius:999px; font-size:12px; }
+    .service{ grid-column: span 4; background: linear-gradient(180deg, rgba(180,20,20,.06), rgba(180,20,20,.02)); border:1px solid rgba(200,50,50,.18); border-radius:18px; padding:18px; transition: box-shadow .2s; }
+    .service:hover{ box-shadow: 0 0 24px rgba(200,30,30,.15); }
+    .service h4{ margin:4px 0 6px; font-weight:800; color:var(--accent); }
+    .service p{ margin:0; color:var(--text-dim); }
+
+    /* STATS */
+    .stats{ padding-top: 28px; }
+    .stat-grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; width:min(1100px,100%); margin:0 auto; }
+    .stat{ grid-column: span 3; background: linear-gradient(180deg, rgba(180,20,20,.08), rgba(180,20,20,.03)); border:1px solid rgba(200,50,50,.2); border-radius:22px; padding:22px 24px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; position:relative; overflow:hidden; box-shadow:var(--shadow); transition: box-shadow .2s; }
+    .stat:hover{ box-shadow: var(--shadow), 0 0 30px rgba(200,30,30,.18); }
+    .stat:after{ content:""; position:absolute; inset:-1px; border-radius:22px; padding:1px; background:linear-gradient(135deg, rgba(220,50,50,.5), rgba(100,10,10,.45)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity:.6; }
+    .stat .icon{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background: radial-gradient(80% 80% at 30% 20%, #e03030 0%, #8b0000 60%, #5a0000 100%); box-shadow: inset 0 0 0 1px rgba(255,120,120,.25), 0 0 14px rgba(200,30,30,.3); position:relative; z-index:1; }
+    .stat .value{ font:800 clamp(22px,3.6vw,32px)/1 Poppins, Inter, sans-serif; letter-spacing:.3px; margin-top:2px; position:relative; z-index:1; color:var(--accent); }
+    .stat .label{ color:var(--text-dim); font-weight:600; position:relative; z-index:1; }
+
+    /* PRICING */
+    #pricing{ position:relative; }
+    #pricing:before{ content:""; position:absolute; inset:0; pointer-events:none; background: radial-gradient(800px 400px at 50% 50%, rgba(180,20,20,.055), transparent 70%); }
+    .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; width:min(1000px,100%); margin:0 auto; }
+    .pricing-card{ background: linear-gradient(180deg, rgba(180,20,20,.07), rgba(180,20,20,.03)); border:1px solid rgba(200,50,50,.2); border-radius:22px; padding:28px 24px; display:flex; flex-direction:column; gap:4px; position:relative; overflow:hidden; transition: transform .22s, box-shadow .22s; }
+    .pricing-card:hover{ transform:translateY(-4px); box-shadow:0 0 36px rgba(200,30,30,.2); }
+    .pricing-card.featured{ border-color:rgba(224,48,48,.5); background: linear-gradient(180deg, rgba(180,20,20,.13), rgba(180,20,20,.05)); box-shadow: var(--shadow), 0 0 40px rgba(200,30,30,.16); }
+    .pricing-card.featured:before{ content:""; position:absolute; inset:-1px; border-radius:22px; padding:1px; background:linear-gradient(135deg,rgba(255,80,80,.5),rgba(180,20,20,.38)); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+    .pricing-badge{ display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:999px; font-size:11px; font-weight:800; background:linear-gradient(90deg,var(--primary),#a00000); color:#fff; width:fit-content; margin-bottom:8px; }
+    .pricing-name{ font:800 20px/1.2 Poppins,Inter,sans-serif; margin:0; }
+    .pricing-price{ font:900 clamp(26px,4vw,36px)/1 Poppins,Inter,sans-serif; color:var(--accent); margin:8px 0 4px; }
+    .pricing-price span{ font-size:15px; color:var(--text-dim); font-weight:600; }
+    .pricing-desc{ color:var(--text-dim); font-size:14px; margin:0 0 16px; }
+    .pricing-features{ list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:9px; flex:1; }
+    .pricing-features li{ display:flex; align-items:flex-start; gap:9px; color:var(--text-dim); font-size:14px; }
+    .pricing-features li .ck{ flex-shrink:0; width:18px; height:18px; border-radius:50%; display:grid; place-items:center; background:rgba(54,194,136,.14); border:1px solid rgba(54,194,136,.3); margin-top:1px; }
+    .pricing-features li .ck svg{ width:10px; height:10px; }
+    .pricing-features li.off{ opacity:.38; }
+    .pricing-features li.off .ck{ background:rgba(200,50,50,.07); border-color:rgba(200,50,50,.18); }
+    .pricing-note{ font-size:12px; color:var(--text-dim); text-align:center; margin-top:10px; opacity:.65; }
+
+    /* TESTIMONIALS */
+    .testi-grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:16px; }
+    .testi{ grid-column:span 4; background:linear-gradient(180deg,rgba(180,20,20,.06),rgba(180,20,20,.02)); border:1px solid rgba(200,50,50,.18); border-radius:20px; padding:20px; display:flex; flex-direction:column; gap:12px; transition:box-shadow .2s, transform .2s; }
+    .testi:hover{ box-shadow:0 0 26px rgba(200,30,30,.14); transform:translateY(-2px); }
+    .testi-stars{ display:flex; gap:3px; }
+    .testi-stars svg{ width:16px; height:16px; }
+    .testi-text{ color:var(--text-dim); font-size:14px; line-height:1.65; flex:1; font-style:italic; }
+    .testi-text:before{ content:'\201C'; color:var(--accent); font-size:24px; line-height:0; vertical-align:-8px; margin-right:2px; font-style:normal; }
+    .testi-author{ display:flex; align-items:center; gap:10px; }
+    .testi-avatar{ width:38px; height:38px; border-radius:12px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#3a1010,#1a0a0a); border:1px solid rgba(200,50,50,.25); display:grid; place-items:center; }
+    .testi-name{ font-weight:800; font-size:14px; }
+    .testi-role{ font-size:12px; color:var(--text-dim); }
+    .testi-platform{ margin-left:auto; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; background:rgba(88,101,242,.11); border:1px solid rgba(88,101,242,.24); color:#a0aaff; white-space:nowrap; }
+
+    /* DISCORD BOTS */
+    #discord-bots{ position:relative; }
+    #discord-bots:before{ content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(900px 400px at 50% 50%,rgba(88,101,242,.07),transparent 70%); }
+    #discord-bots h2 .discord-hl{ background:linear-gradient(90deg,#7289da,var(--discord)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .discord-intro{ width:min(800px,100%); margin:0 auto 36px; text-align:center; color:var(--text-dim); font-size:clamp(15px,2vw,17px); }
+    .discord-intro b{ color:var(--text); }
+    .discord-intro em{ font-style:normal; color:#7289da; font-weight:700; }
+    .bot-grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:16px; margin-bottom:40px; }
+    .bot-card{ grid-column:span 6; background:linear-gradient(160deg,rgba(88,101,242,.09) 0%,rgba(88,101,242,.03) 60%,rgba(180,20,20,.03) 100%); border:1px solid rgba(88,101,242,.25); border-radius:20px; overflow:hidden; position:relative; transition:transform .22s ease,box-shadow .22s ease; box-shadow:var(--shadow); }
+    .bot-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow),0 0 32px rgba(88,101,242,.22); }
+    .bot-card:after{ content:""; position:absolute; right:-50px; bottom:-50px; width:200px; height:200px; background:radial-gradient(closest-side,rgba(88,101,242,.28),transparent 70%); filter:blur(8px); pointer-events:none; }
+    .bot-thumb{ aspect-ratio:16/9; background:linear-gradient(135deg,#0a0c1e,#0d0f2a); overflow:hidden; position:relative; }
+    .bot-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease; }
+    .bot-card:hover .bot-thumb img{ transform:scale(1.04); }
+    .bot-thumb-placeholder{ width:100%; height:100%; display:grid; place-items:center; background:linear-gradient(135deg,#0c0f28,#161a3f); }
+    .bot-thumb-placeholder svg{ opacity:.25; }
+    .bot-body{ padding:16px 18px 20px; position:relative; z-index:1; }
+    .bot-header{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .bot-avatar{ width:44px; height:44px; border-radius:14px; overflow:hidden; background:linear-gradient(135deg,#3a3f9f,#1a1d5e); border:1px solid rgba(88,101,242,.35); flex:0 0 44px; display:grid; place-items:center; }
+    .bot-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .bot-name-wrap{ flex:1; }
+    .bot-name{ font:700 17px/1.2 Poppins,Inter,sans-serif; }
+    .bot-status{ display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:#36c288; background:rgba(54,194,136,.12); border:1px solid rgba(54,194,136,.25); padding:3px 8px; border-radius:999px; margin-top:3px; }
+    .bot-status .dot-green{ width:6px; height:6px; border-radius:50%; background:#36c288; box-shadow:0 0 5px #36c288; }
+    .bot-desc{ color:var(--text-dim); font-size:14px; margin-bottom:12px; }
+    .bot-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+    .bot-tag{ padding:5px 10px; border-radius:999px; font-size:12px; font-weight:700; background:rgba(88,101,242,.14); border:1px solid rgba(88,101,242,.3); color:#a0aaff; }
+    .discord-services{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-bottom:36px; }
+    .dservice{ grid-column:span 3; background:linear-gradient(160deg,rgba(88,101,242,.07),rgba(88,101,242,.02)); border:1px solid rgba(88,101,242,.2); border-radius:16px; padding:16px 18px; transition:box-shadow .2s,border-color .2s; position:relative; overflow:hidden; }
+    .dservice:hover{ box-shadow:0 0 22px rgba(88,101,242,.18); border-color:rgba(88,101,242,.38); }
+    .dservice .dicon{ width:38px; height:38px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(135deg,var(--discord),var(--discord-dark)); margin-bottom:10px; box-shadow:0 0 12px rgba(88,101,242,.3); }
+    .dservice h4{ margin:0 0 5px; font-weight:800; color:#a0aaff; font-size:14px; }
+    .dservice p{ margin:0; color:var(--text-dim); font-size:13px; }
+    .discord-cta{ width:min(800px,100%); margin:0 auto; background:linear-gradient(135deg,rgba(88,101,242,.12) 0%,rgba(88,101,242,.05) 100%); border:1px solid rgba(88,101,242,.28); border-radius:20px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; position:relative; overflow:hidden; }
+    .discord-cta:before{ content:""; position:absolute; right:-40px; top:-40px; width:200px; height:200px; background:radial-gradient(closest-side,rgba(88,101,242,.25),transparent 70%); filter:blur(10px); pointer-events:none; }
+    .discord-cta-text{ flex:1; }
+    .discord-cta-text h3{ margin:0 0 6px; font:700 20px/1.2 Poppins,Inter,sans-serif; }
+    .discord-cta-text p{ margin:0; color:var(--text-dim); }
+    .discord-cta-actions{ display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0; }
+
+    /* WHY CHOOSE ME */
+    #why{ position:relative; }
+    #why:before{ content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(700px 350px at 50% 50%, rgba(180,20,20,.06), transparent 70%); }
+    .why-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; width:min(900px,100%); margin:0 auto; }
+    .why-card{ background:linear-gradient(160deg,rgba(180,20,20,.08),rgba(180,20,20,.03)); border:1px solid rgba(200,50,50,.2); border-radius:20px; padding:24px 22px; display:flex; align-items:flex-start; gap:16px; transition:transform .2s, box-shadow .2s; position:relative; overflow:hidden; }
+    .why-card:hover{ transform:translateY(-3px); box-shadow:0 0 28px rgba(200,30,30,.18); }
+    .why-card:after{ content:""; position:absolute; right:-40px; bottom:-40px; width:160px; height:160px; background:radial-gradient(closest-side,rgba(200,30,30,.2),transparent 70%); filter:blur(8px); pointer-events:none; }
+    .why-icon{ flex-shrink:0; width:48px; height:48px; border-radius:14px; display:grid; place-items:center; background:radial-gradient(80% 80% at 30% 20%,#e03030 0%,#8b0000 60%,#5a0000 100%); box-shadow:inset 0 0 0 1px rgba(255,120,120,.2), 0 0 14px rgba(200,30,30,.25); }
+    .why-content h4{ margin:0 0 6px; font:800 17px/1.2 Poppins,Inter,sans-serif; color:var(--text); }
+    .why-content p{ margin:0; color:var(--text-dim); font-size:14px; line-height:1.6; }
+
+    /* CONTACT */
+    .contact{ display:grid; grid-template-columns:1fr; gap:16px; width:min(720px,100%); margin:0 auto; }
+    .contact .row{ display:flex; gap:10px; }
+    .input{ flex:1; padding:14px 16px; border-radius:12px; background:#0e0505; border:1px solid rgba(200,50,50,.28); color:var(--text); outline:none; transition:border-color .2s; }
+    .input:focus{ border-color:rgba(220,50,50,.6); }
+
+    footer{ padding:32px 0 46px; color:var(--text-dim); text-align:center; opacity:.9; }
+    footer span{ color:var(--accent); }
+
+    /* BACK TO TOP */
+    #back-top{ position:fixed; bottom:28px; right:28px; z-index:100; width:46px; height:46px; border-radius:14px; background:linear-gradient(135deg,var(--primary),#8b0000); border:1px solid rgba(255,80,80,.3); display:grid; place-items:center; cursor:pointer; box-shadow:0 6px 24px rgba(200,30,30,.35); opacity:0; transform:translateY(12px); transition:opacity .3s,transform .3s,filter .2s; pointer-events:none; }
+    #back-top.visible{ opacity:1; transform:translateY(0); pointer-events:all; }
+    #back-top:hover{ filter:brightness(1.2); }
+
+    /* CUSTOM CURSOR */
+    @media(pointer:fine){ *{ cursor:none !important; } }
+    #cursor-dot{ position:fixed; top:0; left:0; z-index:99999; pointer-events:none; width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px rgba(255,85,85,.8), 0 0 24px rgba(255,85,85,.4); transform:translate(-50%,-50%); transition:transform .08s ease, width .15s ease, height .15s ease, opacity .15s; }
+    #cursor-ring{ position:fixed; top:0; left:0; z-index:99998; pointer-events:none; width:32px; height:32px; border-radius:50%; border:1.5px solid rgba(255,85,85,.5); transform:translate(-50%,-50%); transition:transform .18s ease, width .2s ease, height .2s ease, opacity .2s, border-color .2s; }
+    #cursor-dot.clicking{ width:6px; height:6px; }
+    #cursor-ring.clicking{ width:22px; height:22px; border-color:rgba(255,85,85,.9); }
+    #cursor-dot.hovering{ width:14px; height:14px; background:var(--accent); }
+    #cursor-ring.hovering{ width:44px; height:44px; border-color:rgba(255,85,85,.7); }
+
+    /* PARTICLES CANVAS */
+    #particles-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.55; }
+
+    /* LANGUAGE TOGGLE */
+    #lang-toggle{ display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:999px; background:var(--chip); border:1px solid rgba(200,50,50,.28); color:var(--text-dim); font-weight:700; font-size:13px; cursor:pointer; transition:border-color .2s, color .2s; flex-shrink:0; }
+    #lang-toggle:hover{ border-color:rgba(200,50,50,.55); color:var(--text); }
+    #lang-toggle .flag{ font-size:15px; line-height:1; }
+
+    /* DROPDOWN */
+    .user-dropdown{ position:relative; }
+    .dropdown-menu{ position:absolute; top:calc(100% + 8px); right:0; background:#120808; border:1px solid rgba(200,50,50,.3); border-radius:14px; padding:6px; min-width:180px; display:none; z-index:200; box-shadow:var(--shadow); }
+    .dropdown-menu.open{ display:block; }
+    .dropdown-item{ display:flex; align-items:center; gap:9px; padding:9px 12px; border-radius:9px; font-size:13px; font-weight:600; color:var(--text-dim); cursor:pointer; transition:background .2s,color .2s; white-space:nowrap; }
+    .dropdown-item:hover{ background:rgba(200,50,50,.1); color:var(--text); }
+    .dropdown-item.danger:hover{ background:rgba(243,106,106,.1); color:var(--danger); }
+    .dropdown-divider{ height:1px; background:rgba(200,50,50,.15); margin:4px 0; }
+
+    /* IMAGE UPLOAD */
+    .img-attach-btn{ display:grid; place-items:center; width:42px; height:42px; border-radius:12px; background:rgba(200,50,50,.1); border:1px solid rgba(200,50,50,.28); color:var(--text-dim); cursor:pointer; flex-shrink:0; align-self:flex-end; transition:background .2s,color .2s,border-color .2s; }
+    .img-attach-btn:hover{ background:rgba(200,50,50,.2); color:var(--accent); border-color:rgba(200,50,50,.5); }
+    .msg-img-preview{ display:flex; flex-wrap:wrap; gap:8px; padding:10px 20px 0; }
+    .preview-item{ position:relative; width:80px; height:80px; border-radius:10px; overflow:hidden; border:1px solid rgba(200,50,50,.3); flex-shrink:0; }
+    .preview-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .preview-remove{ position:absolute; top:3px; right:3px; width:18px; height:18px; border-radius:50%; background:rgba(0,0,0,.7); border:none; color:#fff; font-size:11px; font-weight:800; cursor:pointer; display:grid; place-items:center; line-height:1; padding:0; }
+    .preview-remove:hover{ background:var(--danger); }
+    .bubble-img{ max-width:220px; max-height:200px; border-radius:10px; display:block; cursor:pointer; margin-top:6px; border:1px solid rgba(200,50,50,.2); transition:transform .15s; }
+    .bubble.img-only{ background:transparent !important; border:none !important; padding:0 !important; }
+    .bubble-img:hover{ transform:scale(1.02); }
+    .img-lightbox{ position:fixed; inset:0; z-index:99000; background:rgba(0,0,0,.88); display:grid; place-items:center; cursor:zoom-out; backdrop-filter:blur(6px); }
+    .img-lightbox img{ max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.8); }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{ width:6px; }
+    ::-webkit-scrollbar-track{ background:transparent; }
+    ::-webkit-scrollbar-thumb{ background:rgba(200,50,50,.25); border-radius:3px; }
+    ::-webkit-scrollbar-thumb:hover{ background:rgba(200,50,50,.45); }
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){
+      .stat{ grid-column:span 6; }
+      .dservice{ grid-column:span 6; }
+      .pricing-grid{ grid-template-columns:1fr 1fr; }
+      .msg-layout{ grid-template-columns:280px 1fr; }
+    }
+    @media(max-width:900px){
+      .profile{ flex-direction:column; text-align:center; }
+      .p-col{ text-align:center; }
+      .grid .card{ grid-column:span 12; }
+      .game{ grid-column:span 6; }
+      .service{ grid-column:span 6; }
+      .bot-card{ grid-column:span 12; }
+      .discord-cta{ flex-direction:column; text-align:center; }
+      .discord-cta-actions{ justify-content:center; }
+      .testi{ grid-column:span 6; }
+      .pricing-grid{ grid-template-columns:1fr; width:min(420px,100%); }
+      .why-grid{ grid-template-columns:1fr; }
+      .msg-layout{ grid-template-columns:1fr; }
+      .msg-sidebar{ display:none; }
+      .msg-sidebar.mobile-open{ display:block; position:fixed; inset:0; top:61px; z-index:20; }
+    }
+    @media(max-width:640px){
+      .hero{ padding-top:28px; }
+      .profile{ gap:12px; }
+      .avatar{ width:84px; height:84px; border-radius:18px; }
+      .grid .card,.game,.service{ grid-column:span 12; }
+      .stat{ grid-column:span 12; }
+      .intro h1{ font-size:36px; }
+      .bot-card{ grid-column:span 12; }
+      .dservice{ grid-column:span 12; }
+      .testi{ grid-column:span 12; }
+      nav{ display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1><span class="typewriter"><span class="gradient">Welcome</span> — Portfolio</span></h1>
+  </div>
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="particles-canvas"></canvas>
+
+  <button id="back-top" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- ══ AUTH MODALS ══ -->
+  <div class="modal-overlay" id="modal-auth">
+    <div class="modal">
+      <button class="modal-close" id="modal-auth-close">✕</button>
+      <div class="tab-row">
+        <button class="tab-btn active" id="tab-login-btn">Login</button>
+        <button class="tab-btn" id="tab-register-btn">Register</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="form-login">
+        <h2>Welcome back 👋</h2>
+        <p class="sub">Sign in to send messages and get a response.</p>
+        <div class="modal-error" id="login-error"></div>
+        <div class="modal-success" id="login-success"></div>
+        <div class="field">
+          <label>Username</label>
+          <input type="text" id="login-username" placeholder="your_username" autocomplete="username"/>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"/>
+        </div>
+        <button class="btn" style="width:100%;justify-content:center;" id="login-submit-btn">Sign In</button>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="form-register" style="display:none;">
+        <h2>Create account 🚀</h2>
+        <p class="sub">Join to contact ZxeDev directly.</p>
+        <div class="modal-error" id="register-error"></div>
+        <div class="modal-success" id="register-success"></div>
+        <div class="field">
+          <label>Username</label>
+          <input type="text" id="reg-username" placeholder="your_username" autocomplete="username"/>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password"/>
+        </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <input type="password" id="reg-confirm" placeholder="••••••••" autocomplete="new-password"/>
+        </div>
+        <button class="btn" style="width:100%;justify-content:center;" id="register-submit-btn">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW MESSAGE MODAL -->
+  <div class="modal-overlay" id="modal-new-msg">
+    <div class="modal">
+      <button class="modal-close" id="modal-newmsg-close">✕</button>
+      <h2>New Message ✉️</h2>
+      <p class="sub">Send a message to ZxeDev — describe your project or question.</p>
+      <div class="modal-error" id="newmsg-error"></div>
+      <div class="field">
+        <label>Subject</label>
+        <input type="text" id="newmsg-subject" placeholder="Commission request / Question..."/>
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea class="input" id="newmsg-body" rows="5" placeholder="Describe your project, budget, timeline..." style="width:100%;resize:vertical;font-family:inherit;font-size:14px;"></textarea>
+      </div>
+      <div class="field">
+        <label>Images <span style="font-weight:400;opacity:.6;">(optional)</span></label>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <label class="img-attach-btn" for="newmsg-img-input" style="width:auto;padding:8px 14px;border-radius:10px;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            Add images
+            <input type="file" id="newmsg-img-input" accept="image/*" multiple style="display:none;"/>
+          </label>
+          <span id="newmsg-img-count" style="font-size:12px;color:var(--text-dim);"></span>
+        </div>
+        <div id="newmsg-img-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+      </div>
+      <button class="btn" style="width:100%;justify-content:center;" id="newmsg-send-btn">Send Message</button>
+    </div>
+  </div>
+
+  <!-- ══ MESSAGES PAGE ══ -->
+  <div id="page-messages">
+    <header class="msg-page-header">
+      <div class="container row">
+        <h1 id="msg-page-title">💬 Messages</h1>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <span id="msg-user-badge" style="font-size:13px;color:var(--text-dim);font-weight:600;"></span>
+          <button class="msg-back" id="msg-back-btn">← Back to portfolio</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- NOT LOGGED IN -->
+    <div class="msg-login-gate" id="msg-gate" style="display:none;">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#ff5555" stroke-width="1.5" fill="none"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="#ff5555" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+      <h2>Login required</h2>
+      <p>You need to be logged in to access the messaging system.</p>
+      <button class="btn" id="msg-gate-login-btn">Sign In / Register</button>
+    </div>
+
+    <!-- LOGGED IN: LAYOUT -->
+    <div class="msg-layout" id="msg-logged-layout" style="display:none;">
+      <!-- SIDEBAR -->
+      <div class="msg-sidebar" id="msg-sidebar">
+        <div class="msg-sidebar-header">
+          <h3 id="sidebar-title">Conversations</h3>
+          <p id="sidebar-sub">Your messages with ZxeDev</p>
+        </div>
+        <div class="thread-list" id="thread-list">
+          <button class="new-msg-btn" id="new-msg-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            New Message
+          </button>
+          <!-- threads injected here -->
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <div class="msg-main" id="msg-main">
+        <div class="no-thread-selected" id="no-thread">
+          <div>
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" stroke="#ff5555" stroke-width="1.3" fill="none"/></svg>
+            <p>Select a conversation</p>
+            <span>Or start a new message</span>
+          </div>
+        </div>
+        <div id="thread-view" style="display:none;flex-direction:column;height:100%;">
+          <div class="msg-top-bar" id="msg-top-bar">
+            <div class="t-avatar" id="conv-avatar"></div>
+            <div>
+              <div class="t-name" id="conv-name"></div>
+              <div class="t-sub" id="conv-sub"></div>
+            </div>
+          </div>
+          <div class="msg-body" id="msg-body"></div>
+          <div class="msg-img-preview" id="msg-img-preview"></div>
+          <div class="msg-input-area">
+            <label class="img-attach-btn" for="img-upload-input" title="Attach image">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              <input type="file" id="img-upload-input" accept="image/*" style="display:none;" multiple/>
+            </label>
+            <textarea id="reply-input" placeholder="Write your reply..." rows="2"></textarea>
+            <button class="msg-send-btn" id="reply-send-btn">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PORTFOLIO CONTENT ══ -->
+  <div id="main-content">
+    <!-- HEADER -->
+    <header class="nav">
+      <div class="container row">
+        <div class="brand">
+          <span class="badge-dot"></span>
+          <span><strong>Roblox</strong> Dev</span>
+        </div>
+        <nav>
+          <a href="#stats" data-i18n="nav_stats">Stats</a>
+          <a href="#games" data-i18n="nav_games">Games</a>
+          <a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
+          <a href="#services" data-i18n="nav_services">Services</a>
+          <a href="#discord-bots">Discord Bots</a>
+          <a href="#why" data-i18n="nav_why">Why Me</a>
+          <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+          <a href="#testimonials" data-i18n="nav_reviews">Reviews</a>
+          <a href="#contact" data-i18n="nav_contact">Contact</a>
+        </nav>
+        <div class="nav-auth" id="nav-auth">
+          <!-- injected by JS -->
+          <button id="lang-toggle" title="Change language">
+            <span class="flag" id="lang-flag">🇫🇷</span>
+            <span id="lang-label">FR</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero container" id="home">
+      <div class="available-badge">
+        <span class="dot-pulse"></span>
+        Available for commissions
+      </div>
+      <h1><em>Roblox Developer</em></h1>
+
+      <div class="profile">
+        <div class="avatar">
+          <img src="https://image.noelshack.com/fichiers/2026/11/4/1773325321-53547fb0c8bce8f0af2a111d88185129.jpg" alt="ZxeDev avatar"/>
+        </div>
+        <div class="p-col">
+          <div class="p-top">
+            <div class="name">ZxeDev</div>
+            <div class="verified">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.09 4.24L18.97 7l-3.23 3.15.76 4.85L12 13.77 7.5 15l.76-4.85L5.03 7l4.88-.76L12 2z" fill="#fff"/><path d="M10.2 11.8l-1.5-1.5 1.06-1.06 1.5 1.5 3.48-3.48 1.06 1.06-4.54 4.48-1.06-1z" fill="#0b0f18"/></svg>
+              Unverified
+            </div>
+          </div>
+          <div class="chips">
+            <span class="chip" data-i18n="chip_dev">Developer</span>
+            <span class="chip" data-i18n="chip_ui">UI/UX</span>
+            <span class="chip">Lua Scripting</span>
+            <span class="chip">Discord Bots</span>
+            <span class="chip"><span class="dot"></span> <span data-i18n="chip_online">Online</span></span>
+            <span class="chip chip-discord" id="discordChip" title="Click to copy">
+              <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none">
+                <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+              discord.gg/T6GdFZD7X9
+              <span class="copy-toast">✓ Copied!</span>
+            </span>
+          </div>
+          <div class="last-online">
+            <span class="dc-dot"></span>
+            <span id="last-online-text">Last seen on Discord: <b>today</b></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="about">
+        Im a <b>Roblox Developer</b> specialized in <em>scripting</em> and <em>3D Model</em>, with 1+ years of experience. I worked on games <b>French Island</b>, <b>Mansion Life Tycoon</b> and <b>Kat X</b> and some others, totalizing <b>51M+</b> visits.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Games I've Worked On</h3>
+          <p>Discover detailed project sheets, figures and responsibilities.</p>
+          <a class="btn" href="#games">View My games →</a>
+        </article>
+        <article class="card">
+          <h3>My Work Portfolio</h3>
+          <p>UI, gameplay systems, internal tools and video demonstrations.</p>
+          <a class="btn secondary" href="#portfolio">Explore the portfolio</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="stats" class="stats container">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M16 14c2.761 0 5 2.239 5 5v1H3v-1c0-2.761 2.239-5 5-5h8Zm-8-2a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm8 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="white" opacity=".9"/></svg></div>
+          <div class="value" data-target="51" data-suffix="M+">51M+</div>
+          <div class="label">Contributed Visits</div>
+        </div>
+        <div class="stat">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.534-7-10a4 4 0 0 1 7-2.646A4 4 0 0 1 19 10c0 5.466-7 10-7 10Z" fill="white" opacity=".9"/></svg></div>
+          <div class="value" data-target="8" data-suffix="k+">8k+</div>
+          <div class="label">Roblox Followers</div>
+        </div>
+        <div class="stat">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 4h12v3a4 4 0 0 1-4 4H10A4 4 0 0 1 6 7V4Zm5 7h2v3h-2v-3Zm-3 6h8v2H8v-2Z" fill="white" opacity=".9"/><path d="M18 7h2a3 3 0 0 1-3 3V7ZM6 10A3 3 0 0 1 3 7h2v3Z" fill="white" opacity=".6"/></svg></div>
+          <div class="value" data-target="12" data-suffix="">12</div>
+          <div class="label">Games Worked On</div>
+        </div>
+        <div class="stat">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17.77 6.36 20.13 7.4 14.06 3 9.77l6.1-.89L12 3Z" fill="white" opacity=".9"/></svg></div>
+          <div class="value" data-target="50" data-suffix="K+">50K+</div>
+          <div class="label">Group Members</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <section id="games" class="container">
+      <h2>Featured games</h2>
+      <div class="pill-row">
+        <span class="chip">Game Development</span><span class="chip">VFX & Effect</span>
+        <span class="chip">Optimisation Of Server</span><span class="chip">UI Responsive</span>
+      </div>
+      <div class="cards-3">
+        <article class="game">
+          <div class="thumb"><img src="https://image.noelshack.com/fichiers/2025/46/3/1762947984-2f24de6b-3ca7-4851-9839-89dd39cb37ea.jpg" alt="French Island"/></div>
+          <div class="body"><h3>French Island</h3><p>GUI, SCRIPT, EFFECT</p><div class="meta"><span class="tag">Lead Developer</span><span class="tag">Scripting</span><span class="tag">Everything</span></div></div>
+        </article>
+        <article class="game">
+          <div class="thumb"><img src="https://image.noelshack.com/fichiers/2025/46/3/1762948003-nofilter.png" alt="Mansion Life Tycoon"/></div>
+          <div class="body"><h3>Mansion Life Tycoon</h3><p>Money System</p><div class="meta"><span class="tag">UI/UX</span><span class="tag">Contributor</span><span class="tag">Monetisation</span></div></div>
+        </article>
+        <article class="game">
+          <div class="thumb"><img src="https://image.noelshack.com/fichiers/2025/46/4/1763050817-47c9f049-e5fa-4695-9f9f-d6262c81a1b8.jpg" alt="Pixel Tower"/></div>
+          <div class="body"><h3>Pixel Tower</h3><p>Owner</p><div class="meta"><span class="tag">Owner</span><span class="tag">All</span><span class="tag">Everything in game</span></div></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="container">
+      <h2>UI &amp; System</h2>
+      <div class="cards-3">
+        <article class="service"><h4>"glass / neon" interfaces</h4><p>HUD currency displays, help/admin panels, responsive shops, refined transitions.</p></article>
+        <article class="service"><h4>Gameplay Modules</h4><p>Inventories, quests, professions, progression, light anti-cheat.</p></article>
+        <article class="service"><h4>Dev Tools</h4><p>Secure remotes, debug profiles, analytics &amp; server traces.</p></article>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="container">
+      <h2>What I propose</h2>
+      <div class="cards-3">
+        <article class="service"><h4>Game Scripting (Lua)</h4><p>Clear server/client architecture, modular patterns, stable performance.</p></article>
+        <article class="service"><h4>UI/UX Premium</h4><p>Modern design, subtle animation, mobile/PC responsiveness, basic accessibility.</p></article>
+        <article class="service"><h4>Optimisation</h4><p>Profiling, batching, throttling, and GC reduction for long-lasting servers.</p></article>
+      </div>
+    </section>
+
+    <!-- DISCORD BOTS -->
+    <section id="discord-bots" class="container">
+      <h2><span class="discord-hl">Discord Bot</span> Development</h2>
+      <p class="discord-intro">Beyond Roblox, I build <em>custom Discord bots</em> in <b>JavaScript / Node.js</b> using <b>discord.js</b>. From moderation tools to full economy systems, I deliver clean, reliable and feature-rich bots tailored to your server's needs.</p>
+      <div class="bot-grid">
+        <article class="bot-card">
+          <div class="bot-thumb"><div class="bot-thumb-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03Z" fill="#5865F2"/></svg></div></div>
+          <div class="bot-body"><div class="bot-header"><div class="bot-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#5865F2"/><path d="M8 10.5C8 9.67 8.67 9 9.5 9s1.5.67 1.5 1.5S10.33 12 9.5 12 8 11.33 8 10.5Zm5 0C13 9.67 13.67 9 14.5 9s1.5.67 1.5 1.5S15.33 12 14.5 12 13 11.33 13 10.5Zm-5.5 4c.55-1.24 1.73-2 3.5-2s2.95.76 3.5 2H7.5Z" fill="white"/></svg></div><div class="bot-name-wrap"><div class="bot-name">Capyrox Studio</div><div class="bot-status"><span class="dot-green"></span> Online</div></div></div><p class="bot-desc">Full-featured moderation bot: auto-mod, warnings system, mute/ban/kick with logs, anti-spam, anti-raid protection and customizable punishments per infraction.</p><div class="bot-tags"><span class="bot-tag">Auto-Moderation</span><span class="bot-tag">Logs</span><span class="bot-tag">Anti-Raid</span><span class="bot-tag">discord.js v14</span></div></div>
+        </article>
+        <article class="bot-card">
+          <div class="bot-thumb"><div class="bot-thumb-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03Z" fill="#5865F2"/></svg></div></div>
+          <div class="bot-body"><div class="bot-header"><div class="bot-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#3ba55c"/><path d="M12 6v6l4 2-1 1.73-4.73-2.73V6H12Z" fill="white"/></svg></div><div class="bot-name-wrap"><div class="bot-name">RS Dev's</div><div class="bot-status"><span class="dot-green"></span> Online</div></div></div><p class="bot-desc">Complete economy system: virtual currency, daily rewards, shop, leaderboard, level &amp; XP progression, custom role rewards and bank/transfer commands.</p><div class="bot-tags"><span class="bot-tag">Economy</span><span class="bot-tag">Leveling</span><span class="bot-tag">Shop</span><span class="bot-tag">Leaderboard</span></div></div>
+        </article>
+        <article class="bot-card">
+          <div class="bot-thumb"><div class="bot-thumb-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03Z" fill="#5865F2"/></svg></div></div>
+          <div class="bot-body"><div class="bot-header"><div class="bot-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#eb459e"/><path d="M8 9h8M8 12h5M8 15h6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="bot-name-wrap"><div class="bot-name">Ticket Pro</div><div class="bot-status"><span class="dot-green"></span> Online</div></div></div><p class="bot-desc">Advanced ticket system with categories, staff assignment, transcript export, priority tags and full panel management via slash commands.</p><div class="bot-tags"><span class="bot-tag">Tickets</span><span class="bot-tag">Transcripts</span><span class="bot-tag">Slash Commands</span><span class="bot-tag">Panels</span></div></div>
+        </article>
+        <article class="bot-card">
+          <div class="bot-thumb"><div class="bot-thumb-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03Z" fill="#5865F2"/></svg></div></div>
+          <div class="bot-body"><div class="bot-header"><div class="bot-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#faa61a"/><path d="M12 7l1.55 3.14L17 10.74l-2.5 2.44.59 3.44L12 15l-3.09 1.62.59-3.44L7 10.74l3.45-.6L12 7Z" fill="white"/></svg></div><div class="bot-name-wrap"><div class="bot-name">Custom Bot</div><div class="bot-status"><span class="dot-green"></span> Made to order</div></div></div><p class="bot-desc">Any feature you can imagine: giveaways, reaction roles, welcome embeds, music, polls, auto-roles, dashboard, DB integration, and more — fully custom.</p><div class="bot-tags"><span class="bot-tag">Any Feature</span><span class="bot-tag">Full Custom</span><span class="bot-tag">On Demand</span><span class="bot-tag">Fast Delivery</span></div></div>
+        </article>
+      </div>
+      <h3 style="text-align:center;font:700 20px/1.3 Poppins,Inter,sans-serif;margin:0 0 20px;color:var(--text-dim);">What I can build for your server</h3>
+      <div class="discord-services">
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 1S7 6 7 12a5 5 0 0 0 10 0c0-6-5-11-5-11Z" fill="white" opacity=".85"/></svg></div><h4>Moderation Systems</h4><p>Auto-mod, warn/mute/ban logs, anti-spam, anti-raid, custom filter rules.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="white" stroke-width="1.6" fill="none" opacity=".85"/><path d="M7 10h10M7 14h6" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></svg></div><h4>Ticket Systems</h4><p>Categories, staff assignment, priority, transcript export, embed panels.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5.07 5.6.81-4.05 3.95.96 5.59L12 16l-5.01 2.42.96-5.59L3.9 8.88l5.6-.81L12 3Z" fill="white" opacity=".85"/></svg></div><h4>Economy &amp; Leveling</h4><p>Virtual currency, XP/rank system, shop, leaderboard, daily rewards.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="white" opacity=".85"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" stroke="white" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".7"/></svg></div><h4>Welcome &amp; Auto-Roles</h4><p>Custom welcome embeds, DM on join, reaction roles, auto-role on join.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8Z" fill="white" opacity=".85"/></svg></div><h4>Giveaways &amp; Events</h4><p>Timed giveaways, entry conditions, reroll system, event announcement tools.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="white" opacity=".85"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="white" opacity=".6"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="white" opacity=".6"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="white" opacity=".4"/></svg></div><h4>Dashboard Integration</h4><p>Web-based control panel with config, stats and live bot management.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9Zm.5 13.5h-1v-6h1v6Zm-.5-7.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" fill="white" opacity=".85"/></svg></div><h4>Slash Commands</h4><p>Clean slash command UX with autocomplete, ephemeral replies and modals.</p></article>
+        <article class="dservice"><div class="dicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2ZM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" fill="white" opacity=".85"/></svg></div><h4>Fully Custom</h4><p>Any unique feature — game integrations, APIs, webhooks, DB. Just ask.</p></article>
+      </div>
+      <div class="discord-cta">
+        <div class="discord-cta-text"><h3>Need a custom Discord bot?</h3><p>Reach out on Discord or via the contact form below — I'll get back to you fast.</p></div>
+        <div class="discord-cta-actions">
+          <a class="btn discord-btn" href="https://discord.gg/T6GdFZD7X9" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03Z" fill="white"/></svg>Contact on Discord</a>
+          <a class="btn secondary" href="#contact">Get a quote</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE ME -->
+    <section id="why" class="container">
+      <h2 data-i18n="why_title">Why choose me?</h2>
+      <p style="text-align:center;color:var(--text-dim);margin:-10px 0 32px;font-size:15px;" data-i18n="why_sub">Here's what makes me different from other developers.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8Z" fill="white" opacity=".9"/></svg></div>
+          <div class="why-content"><h4 data-i18n="why1_title">Fast Delivery</h4><p data-i18n="why1_desc">I work efficiently and respect deadlines. Most projects are delivered ahead of schedule — no long waits, no empty promises.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 0 1 5 5c0 2.76-2.24 5-5 5S7 9.76 7 7a5 5 0 0 1 5-5Zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4Z" fill="white" opacity=".85"/><path d="M19 8l2 2-6 6-3-3 2-2 1 1 4-4Z" fill="white" opacity=".5"/></svg></div>
+          <div class="why-content"><h4 data-i18n="why2_title">Clean & Maintainable Code</h4><p data-i18n="why2_desc">No spaghetti code. Everything is modular, well-commented, and easy to extend. You own what I build — no black boxes.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9Zm1 13h-2v-6h2v6Zm0-8h-2V6h2v2Z" fill="white" opacity=".9"/></svg></div>
+          <div class="why-content"><h4 data-i18n="why3_title">Real Experience, Proven Results</h4><p data-i18n="why3_desc">51M+ visits across projects I've worked on. I know what players expect and how to build systems that scale and perform.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="white" stroke-width="1.8" fill="none" opacity=".85"/><path d="M7 10h10M7 14h6" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7"/></svg></div>
+          <div class="why-content"><h4 data-i18n="why4_title">Always Communicating</h4><p data-i18n="why4_desc">I stay active on Discord and keep you updated throughout. If something needs adjusting, just say so — revisions are part of the deal.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="container">
+      <h2>Pricing</h2>
+      <p style="text-align:center;color:var(--text-dim);margin:-10px 0 32px;font-size:15px;">All prices in Robux or USD — negotiable depending on project scope.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-price">800 <span>R$ / ~10$</span></div>
+          <div class="pricing-desc">Perfect for small features or simple bots.</div>
+          <ul class="pricing-features">
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1 core feature / system</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Basic UI or command set</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Delivery in ~2 days</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1 revision included</li>
+            <li class="off"><span class="ck"></span>Multi-system project</li>
+            <li class="off"><span class="ck"></span>Priority support</li>
+          </ul>
+          <a class="btn secondary" href="https://discord.gg/T6GdFZD7X9" target="_blank">Get started</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge">⭐ Most Popular</div>
+          <div class="pricing-name">Pro</div>
+          <div class="pricing-price">3 000 <span>R$ / ~35$</span></div>
+          <div class="pricing-desc">Complete systems, full bots, rich UI — best value.</div>
+          <ul class="pricing-features">
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Up to 5 systems / features</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Premium UI design</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Delivery in ~5 days</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>3 revisions included</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Performance optimization</li>
+            <li class="off"><span class="ck"></span>Dedicated support channel</li>
+          </ul>
+          <a class="btn" href="https://discord.gg/T6GdFZD7X9" target="_blank">Get started</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">Custom</div>
+          <div class="pricing-price">DM <span>for quote</span></div>
+          <div class="pricing-desc">Full game, large bot, long-term collaboration.</div>
+          <ul class="pricing-features">
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unlimited scope</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full game / full bot dev</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Deadline negotiated</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unlimited revisions</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Dedicated support channel</li>
+            <li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#36c288" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Long-term partnership</li>
+          </ul>
+          <a class="btn secondary" href="https://discord.gg/T6GdFZD7X9" target="_blank">Contact me</a>
+          <p class="pricing-note">Prices can also be paid in USD via PayPal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="container">
+      <h2>What clients say</h2>
+      <p style="text-align:center;color:var(--text-dim);margin:-10px 0 28px;font-size:15px;">Real feedback from Discord &amp; Roblox collaborators.</p>
+      <div class="testi-grid">
+        <article class="testi">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">Delivered a full economy system in 3 days. Clean code, great communication, will definitely work again.</p>
+          <div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ff5555"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#ff5555" opacity=".5"/></svg></div><div><div class="testi-name">xBlaze_Dev</div><div class="testi-role">Game Developer</div></div><span class="testi-platform">Discord</span></div>
+        </article>
+        <article class="testi">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">The UI he made for our tycoon game is insane. Super clean, responsive, and exactly what we wanted.</p>
+          <div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#5865F2"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#5865F2" opacity=".5"/></svg></div><div><div class="testi-name">NovaStudio_RBX</div><div class="testi-role">Studio Owner</div></div><span class="testi-platform">Roblox</span></div>
+        </article>
+        <article class="testi">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#3a3a3a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">Built our moderation bot from scratch. Solid work, good price, and he fixed a bug super fast after delivery.</p>
+          <div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#36c288"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#36c288" opacity=".5"/></svg></div><div><div class="testi-name">MrCryptix</div><div class="testi-role">Server Owner</div></div><span class="testi-platform">Discord</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container">
+      <h2>Contact me</h2>
+      <div class="contact">
+        <div class="row">
+          <input id="name" class="input" type="text" placeholder="Your Username"/>
+          <input id="email" class="input" type="email" placeholder="Your Email"/>
+        </div>
+        <textarea id="message" class="input" rows="4" placeholder="Describe your project (genre, features, deadlines, bot type...)..."></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button id="sendEmailBtn" class="btn" type="button">Send Email (Contact On Discord If It Doesn't Work)</button>
+          <a class="btn secondary" href="https://discord.gg/T6GdFZD7X9" target="_blank" rel="noopener">Contact On Discord</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y">2025</span> <span>ZxeDev</span> — Roblox Developer &amp; Discord Bot Developer.
+    </footer>
+  </div><!-- /#main-content -->
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getDatabase, ref, set, get, push, onValue, update, child }
+      from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+    /* ══════════════════════════════════════════
+       FIREBASE CONFIG  — données partagées entre tous les navigateurs
+    ══════════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       FIREBASE CONFIG
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ÉTAPES D'INSTALLATION (5 min) :
+       1. Va sur https://console.firebase.google.com
+       2. "Add project" → nom : zxedev-portfolio
+       3. Dans le projet : "Realtime Database" → "Create database"
+          → choisir une région → "Start in test mode"
+       4. "Project settings" (⚙️) → "Your apps" → "</>" (Web)
+          → enregistre l'app → copie le firebaseConfig
+       5. Remplace les 7 valeurs ci-dessous par les tiennes
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    const firebaseConfig = {
+      apiKey:            "AIzaSyAZfwHPz8x-MoTjP3L6h-95M982ZC8Nh-A",
+      authDomain:        "zxedev-portfolio.firebaseapp.com",
+      databaseURL:       "https://zxedev-portfolio-default-rtdb.firebaseio.com",
+      projectId:         "zxedev-portfolio",
+      storageBucket:     "zxedev-portfolio.firebasestorage.app",
+      messagingSenderId: "489338315763",
+      appId:             "1:489338315763:web:93f1752084a53f7480a886"
+    };
+
+    const FIREBASE_CONFIGURED = !Object.values(firebaseConfig).includes("REMPLACE_ICI");
+
+    // Afficher une bannière si Firebase n'est pas encore configuré
+    if(!FIREBASE_CONFIGURED) {
+      const banner = document.createElement('div');
+      banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99990;background:linear-gradient(90deg,#7a4a00,#4a2d00);color:#ffd080;padding:12px 20px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(250,166,26,.4);';
+      banner.innerHTML = '<span>⚠️ <b>Firebase non configuré</b> — Les messages ne seront pas partagés entre navigateurs. Suis les instructions dans le code pour configurer Firebase (5 min).</span><button onclick="this.parentElement.remove()" style="background:rgba(250,166,26,.2);border:1px solid rgba(250,166,26,.4);color:#ffd080;padding:5px 12px;border-radius:8px;font-weight:700;cursor:pointer;">OK</button>';
+      document.body.appendChild(banner);
+    }
+
+    let app, db;
+    let firebaseReady = false;
+
+    if(FIREBASE_CONFIGURED) {
+      try {
+        app = initializeApp(firebaseConfig);
+        db = getDatabase(app);
+        firebaseReady = true;
+      } catch(e) {
+        console.warn('Firebase init failed, falling back to localStorage:', e);
+      }
+    }
+
+    /* ══════════════════════════════════════════
+       COUCHE D'ABSTRACTION DONNÉES
+       — Firebase si dispo, localStorage sinon
+    ══════════════════════════════════════════ */
+    async function dbGetUsers() {
+      if(firebaseReady) {
+        try {
+          const snap = await get(ref(db, 'users'));
+          return snap.exists() ? snap.val() : {};
+        } catch(e) { /* fallback */ }
+      }
+      try{ return JSON.parse(localStorage.getItem('pf_users')||'{}'); }catch(e){ return {}; }
+    }
+
+    async function dbSaveUser(key, userData) {
+      if(firebaseReady) {
+        try { await set(ref(db, 'users/'+key), userData); return; } catch(e) { /* fallback */ }
+      }
+      var users = JSON.parse(localStorage.getItem('pf_users')||'{}');
+      users[key] = userData;
+      localStorage.setItem('pf_users', JSON.stringify(users));
+    }
+
+    async function dbGetThreads() {
+      if(firebaseReady) {
+        try {
+          const snap = await get(ref(db, 'threads'));
+          if(!snap.exists()) return [];
+          const val = snap.val();
+          return Object.keys(val).map(k => ({ id: k, ...val[k], messages: val[k].messages ? Object.values(val[k].messages) : [] }));
+        } catch(e) { /* fallback */ }
+      }
+      try{ return JSON.parse(localStorage.getItem('pf_threads')||'[]'); }catch(e){ return []; }
+    }
+
+    async function dbSaveThread(thread) {
+      if(firebaseReady) {
+        try {
+          const { id, messages, ...meta } = thread;
+          await set(ref(db, 'threads/'+id+'/meta'), meta);
+          // messages stockées comme array indexé
+          const msgsObj = {};
+          (messages||[]).forEach((m,i) => { msgsObj[i] = m; });
+          await set(ref(db, 'threads/'+id+'/messages'), msgsObj);
+          return;
+        } catch(e) { /* fallback */ }
+      }
+      var threads = JSON.parse(localStorage.getItem('pf_threads')||'[]');
+      var idx = threads.findIndex(function(t){ return t.id === thread.id; });
+      if(idx >= 0) threads[idx] = thread; else threads.push(thread);
+      localStorage.setItem('pf_threads', JSON.stringify(threads));
+    }
+
+    async function dbUpdateThread(id, updates) {
+      if(firebaseReady) {
+        try { await update(ref(db, 'threads/'+id+'/meta'), updates); return; } catch(e) { /* fallback */ }
+      }
+      var threads = JSON.parse(localStorage.getItem('pf_threads')||'[]');
+      var t = threads.find(function(x){ return x.id===id; });
+      if(t) Object.assign(t, updates);
+      localStorage.setItem('pf_threads', JSON.stringify(threads));
+    }
+
+    async function dbPushMessage(tid, msg) {
+      if(firebaseReady) {
+        try {
+          const snap = await get(ref(db, 'threads/'+tid+'/messages'));
+          const existing = snap.exists() ? Object.keys(snap.val()).length : 0;
+          await set(ref(db, 'threads/'+tid+'/messages/'+existing), msg);
+          await update(ref(db, 'threads/'+tid+'/meta'), { updatedAt: msg.timestamp });
+          return;
+        } catch(e) { /* fallback */ }
+      }
+      var threads = JSON.parse(localStorage.getItem('pf_threads')||'[]');
+      var t = threads.find(function(x){ return x.id===tid; });
+      if(t){ t.messages.push(msg); t.updatedAt = msg.timestamp; }
+      localStorage.setItem('pf_threads', JSON.stringify(threads));
+    }
+
+    /* ══ Listener temps réel (mise à jour auto quand un autre user envoie) ══ */
+    function listenThreads(callback) {
+      if(firebaseReady) {
+        onValue(ref(db, 'threads'), (snap) => {
+          if(!snap.exists()){ callback([]); return; }
+          const val = snap.val();
+          const threads = Object.keys(val).map(k => {
+            const t = val[k];
+            const meta = t.meta || {};
+            const msgs = t.messages ? Object.values(t.messages) : [];
+            return { id: k, ...meta, messages: msgs };
+          });
+          callback(threads);
+        });
+        return;
+      }
+      // localStorage — pas de temps réel, polling toutes les 3s
+      callback(JSON.parse(localStorage.getItem('pf_threads')||'[]'));
+      setInterval(() => {
+        callback(JSON.parse(localStorage.getItem('pf_threads')||'[]'));
+      }, 3000);
+    }
+
+    /* Session — toujours localStorage (locale par navigateur, c'est voulu) */
+    function getSession(){ try{ return JSON.parse(localStorage.getItem('pf_session')||'null'); }catch(e){ return null; } }
+    function saveSession(s){ localStorage.setItem('pf_session', JSON.stringify(s)); }
+    function clearSession(){ localStorage.removeItem('pf_session'); }
+
+    /* ══════════════════════════════════════════
+       INIT — seed admin account
+    ══════════════════════════════════════════ */
+    const ADMIN_USERNAME = 'zxedev';
+
+    async function seedAdmin() {
+      const users = await dbGetUsers();
+      if(!users[ADMIN_USERNAME]) {
+        await dbSaveUser(ADMIN_USERNAME, { username: 'zxedev', password: 'zxedev2025', isAdmin: true, createdAt: Date.now() });
+      }
+    }
+    seedAdmin();
+
+    /* ══════════════════════════════════════════
+       STATE
+    ══════════════════════════════════════════ */
+    let currentSession = getSession();
+    let currentThreadId = null;
+    let allThreads = []; // cache local mis à jour par le listener
+
+    function isAdmin(){ return currentSession && currentSession.username.toLowerCase() === ADMIN_USERNAME; }
+    function isLoggedIn(){ return !!currentSession; }
+
+    // Démarrer le listener global dès le chargement
+    listenThreads(function(threads) {
+      allThreads = threads;
+      if(isLoggedIn()) {
+        renderNavAuthBadge();
+        if(document.getElementById('page-messages').classList.contains('open')) {
+          renderThreadList();
+          if(currentThreadId) renderMainArea();
+        }
+      }
+    });
+
+    /* ══════════════════════════════════════════
+       NAV AUTH RENDER
+    ══════════════════════════════════════════ */
+    function renderNavAuthBadge() {
+      var badge = document.querySelector('.btn-nav.messages .notif-badge');
+      var count = countUnread();
+      if(badge) { badge.textContent = count; badge.style.display = count > 0 ? 'grid' : 'none'; }
+    }
+
+    function renderNavAuth(){
+      var container = document.getElementById('nav-auth');
+      if(!container) return;
+
+      var langBtn = '<button id="lang-toggle" title="Change language"><span class="flag" id="lang-flag">🇫🇷</span><span id="lang-label">FR</span></button>';
+
+      if(!isLoggedIn()){
+        container.innerHTML =
+          '<button class="btn-nav login" id="nav-login-btn">Sign In</button>' +
+          '<button class="btn-nav register" id="nav-reg-btn">Register</button>' +
+          langBtn;
+        document.getElementById('nav-login-btn').addEventListener('click', function(){ openAuthModal('login'); });
+        document.getElementById('nav-reg-btn').addEventListener('click', function(){ openAuthModal('register'); });
+      } else {
+        var crown = isAdmin() ? '<span class="admin-crown">👑</span>' : '';
+        var unreadCount = countUnread();
+        var badge = unreadCount > 0 ? '<span class="notif-badge">'+unreadCount+'</span>' : '';
+        container.innerHTML =
+          '<button class="btn-nav messages" id="nav-msg-btn" style="position:relative;">💬 Messages'+badge+'</button>' +
+          '<div class="user-dropdown">' +
+            '<div class="user-chip" id="user-chip-btn"><span class="dot"></span>'+crown+' '+escapeHtml(currentSession.username)+'</div>' +
+            '<div class="dropdown-menu" id="user-dropdown-menu">' +
+              '<div class="dropdown-item" id="dd-messages">💬 Messages</div>' +
+              (isAdmin() ? '<div class="dropdown-item" id="dd-admin">👑 Admin Panel</div>' : '') +
+              '<div class="dropdown-divider"></div>' +
+              '<div class="dropdown-item danger" id="dd-logout">🚪 Sign Out</div>' +
+            '</div>' +
+          '</div>' +
+          langBtn;
+
+        document.getElementById('nav-msg-btn').addEventListener('click', openMessagesPage);
+        document.getElementById('user-chip-btn').addEventListener('click', function(e){
+          e.stopPropagation();
+          var menu = document.getElementById('user-dropdown-menu');
+          menu.classList.toggle('open');
+        });
+        document.getElementById('dd-messages').addEventListener('click', openMessagesPage);
+        document.getElementById('dd-logout').addEventListener('click', logout);
+        if(document.getElementById('dd-admin')){
+          document.getElementById('dd-admin').addEventListener('click', openMessagesPage);
+        }
+        document.addEventListener('click', function closeMenu(e){
+          var menu = document.getElementById('user-dropdown-menu');
+          if(menu && !menu.contains(e.target)) menu.classList.remove('open');
+        });
+      }
+      initLangToggle();
+    }
+
+    function countUnread(){
+      if(!isLoggedIn()) return 0;
+      var count = 0;
+      allThreads.forEach(function(t){
+        if(isAdmin()){
+          if(t.messages && t.messages.length > 0){
+            var last = t.messages[t.messages.length-1];
+            if(last.sender !== ADMIN_USERNAME && !t.readByAdmin) count++;
+          }
+        } else {
+          if(t.username === currentSession.username){
+            var hasUnread = (t.messages||[]).some(function(m){ return m.sender === ADMIN_USERNAME && !m.readByUser; });
+            if(hasUnread) count++;
+          }
+        }
+      });
+      return count;
+    }
+
+    /* ══════════════════════════════════════════
+       AUTH MODAL
+    ══════════════════════════════════════════ */
+    var authOverlay = document.getElementById('modal-auth');
+    document.getElementById('modal-auth-close').addEventListener('click', closeAuthModal);
+    authOverlay.addEventListener('click', function(e){ if(e.target === authOverlay) closeAuthModal(); });
+
+    function openAuthModal(tab){
+      authOverlay.classList.add('open');
+      showTab(tab || 'login');
+    }
+    function closeAuthModal(){
+      authOverlay.classList.remove('open');
+      clearAuthErrors();
+    }
+
+    document.getElementById('tab-login-btn').addEventListener('click', function(){ showTab('login'); });
+    document.getElementById('tab-register-btn').addEventListener('click', function(){ showTab('register'); });
+
+    function showTab(tab){
+      var isLogin = tab === 'login';
+      document.getElementById('form-login').style.display = isLogin ? '' : 'none';
+      document.getElementById('form-register').style.display = isLogin ? 'none' : '';
+      document.getElementById('tab-login-btn').classList.toggle('active', isLogin);
+      document.getElementById('tab-register-btn').classList.toggle('active', !isLogin);
+      clearAuthErrors();
+    }
+
+    function clearAuthErrors(){
+      ['login-error','login-success','register-error','register-success'].forEach(function(id){
+        var el = document.getElementById(id);
+        if(el){ el.classList.remove('show'); el.textContent = ''; }
+      });
+    }
+
+    function showErr(id, msg){ var el = document.getElementById(id); if(el){ el.textContent = msg; el.classList.add('show'); } }
+    function showOk(id, msg){ var el = document.getElementById(id); if(el){ el.textContent = msg; el.classList.add('show'); } }
+
+    // LOGIN
+    document.getElementById('login-submit-btn').addEventListener('click', async function(){
+      var uname = (document.getElementById('login-username').value||'').trim().toLowerCase();
+      var pwd = (document.getElementById('login-password').value||'').trim();
+      if(!uname || !pwd){ showErr('login-error','Please fill in all fields.'); return; }
+      var users = await dbGetUsers();
+      var user = users[uname];
+      if(!user || user.password !== pwd){ showErr('login-error','Invalid username or password.'); return; }
+      currentSession = { username: user.username, isAdmin: !!user.isAdmin };
+      saveSession(currentSession);
+      showOk('login-success', 'Welcome back, ' + user.username + '! 👋');
+      setTimeout(function(){ closeAuthModal(); renderNavAuth(); }, 900);
+    });
+    document.getElementById('login-username').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('login-submit-btn').click(); });
+    document.getElementById('login-password').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('login-submit-btn').click(); });
+
+    // REGISTER
+    document.getElementById('register-submit-btn').addEventListener('click', async function(){
+      var uname = (document.getElementById('reg-username').value||'').trim();
+      var pwd = (document.getElementById('reg-password').value||'').trim();
+      var conf = (document.getElementById('reg-confirm').value||'').trim();
+      if(!uname || !pwd || !conf){ showErr('register-error','Please fill in all fields.'); return; }
+      if(uname.length < 3){ showErr('register-error','Username must be at least 3 characters.'); return; }
+      if(!/^[a-zA-Z0-9_]+$/.test(uname)){ showErr('register-error','Username can only contain letters, numbers and underscores.'); return; }
+      if(pwd.length < 6){ showErr('register-error','Password must be at least 6 characters.'); return; }
+      if(pwd !== conf){ showErr('register-error','Passwords do not match.'); return; }
+      var key = uname.toLowerCase();
+      var users = await dbGetUsers();
+      if(users[key]){ showErr('register-error','This username is already taken.'); return; }
+      await dbSaveUser(key, { username: uname, password: pwd, isAdmin: false, createdAt: Date.now() });
+      currentSession = { username: uname, isAdmin: false };
+      saveSession(currentSession);
+      showOk('register-success', 'Account created! Welcome, ' + uname + ' 🎉');
+      setTimeout(function(){ closeAuthModal(); renderNavAuth(); }, 900);
+    });
+
+    /* ══════════════════════════════════════════
+       MESSAGES PAGE
+    ══════════════════════════════════════════ */
+    var msgPage = document.getElementById('page-messages');
+    var mainContent = document.getElementById('main-content');
+
+    function openMessagesPage(){
+      mainContent.style.display = 'none';
+      msgPage.classList.add('open');
+      renderMessagesPage();
+      window.scrollTo(0,0);
+      var menu = document.getElementById('user-dropdown-menu');
+      if(menu) menu.classList.remove('open');
+    }
+
+    function closeMessagesPage(){
+      msgPage.classList.remove('open');
+      mainContent.style.display = '';
+      renderNavAuth();
+    }
+
+    document.getElementById('msg-back-btn').addEventListener('click', closeMessagesPage);
+
+    function renderMessagesPage(){
+      var gate = document.getElementById('msg-gate');
+      var layout = document.getElementById('msg-logged-layout');
+      var userBadge = document.getElementById('msg-user-badge');
+      var pageTitle = document.getElementById('msg-page-title');
+
+      if(!isLoggedIn()){
+        gate.style.display = 'grid';
+        layout.style.display = 'none';
+        return;
+      }
+      gate.style.display = 'none';
+      layout.style.display = 'grid';
+
+      if(isAdmin()){
+        pageTitle.textContent = '👑 Admin — All Conversations';
+        userBadge.innerHTML = '<span style="color:#faa61a;font-weight:800;">👑 Admin</span>';
+        document.getElementById('sidebar-title').textContent = 'All Conversations';
+        document.getElementById('sidebar-sub').textContent = 'Messages from users';
+      } else {
+        pageTitle.textContent = '💬 My Messages';
+        userBadge.textContent = 'Logged in as ' + currentSession.username;
+        document.getElementById('sidebar-title').textContent = 'My Conversations';
+        document.getElementById('sidebar-sub').textContent = 'Your messages with ZxeDev';
+      }
+      renderThreadList();
+      renderMainArea();
+    }
+
+    document.getElementById('msg-gate-login-btn').addEventListener('click', function(){
+      closeMessagesPage();
+      openAuthModal('login');
+    });
+
+    /* ── THREAD LIST ── */
+    function renderThreadList(){
+      var list = document.getElementById('thread-list');
+      var filtered = isAdmin() ? allThreads : allThreads.filter(function(t){ return t.username === currentSession.username; });
+
+      var html = '<button class="new-msg-btn" id="new-msg-btn">'+
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'+
+        'New Message</button>';
+
+      if(filtered.length === 0){
+        html += '<div style="text-align:center;padding:24px 12px;color:var(--text-dim);font-size:13px;">No conversations yet.<br>Start by sending a message!</div>';
+      } else {
+        filtered.slice().sort(function(a,b){ return (b.updatedAt||0) - (a.updatedAt||0); }).forEach(function(t){
+          var msgs = t.messages || [];
+          var lastMsg = msgs.length > 0 ? msgs[msgs.length-1] : null;
+          var preview = lastMsg ? lastMsg.text.substring(0,40)+(lastMsg.text.length>40?'…':'') : t.subject;
+          var time = lastMsg ? timeAgo(lastMsg.timestamp) : timeAgo(t.createdAt);
+          var isUnread = isAdmin()
+            ? (!t.readByAdmin && lastMsg && lastMsg.sender !== ADMIN_USERNAME)
+            : msgs.some(function(m){ return m.sender===ADMIN_USERNAME && !m.readByUser; });
+          var active = t.id === currentThreadId ? ' active' : '';
+          var unread = isUnread ? ' unread' : '';
+          var initials = (isAdmin() ? t.username : 'ZxeDev').substring(0,2).toUpperCase();
+          html += '<div class="thread-item'+active+unread+'" data-tid="'+t.id+'">'+
+            '<div class="thread-avatar">'+initials+'</div>'+
+            '<div class="thread-info">'+
+              '<div class="thread-name">'+(isAdmin() ? escapeHtml(t.username) : escapeHtml(t.subject))+'</div>'+
+              '<div class="thread-preview">'+escapeHtml(preview)+'</div>'+
+            '</div>'+
+            '<div class="thread-time">'+time+'</div>'+
+          '</div>';
+        });
+      }
+      list.innerHTML = html;
+      document.getElementById('new-msg-btn').addEventListener('click', openNewMsgModal);
+      list.querySelectorAll('.thread-item').forEach(function(el){
+        el.addEventListener('click', function(){ selectThread(el.dataset.tid); });
+      });
+    }
+
+    async function selectThread(id){
+      currentThreadId = id;
+      var t = allThreads.find(function(x){ return x.id === id; });
+      if(t){
+        if(isAdmin()){ await dbUpdateThread(id, { readByAdmin: true }); }
+        else {
+          // marquer les messages admin comme lus
+          var msgs = (t.messages||[]).map(function(m){
+            if(m.sender===ADMIN_USERNAME) return Object.assign({},m,{readByUser:true});
+            return m;
+          });
+          if(firebaseReady) {
+            const msgsObj = {};
+            msgs.forEach((m,i) => { msgsObj[i] = m; });
+            try { await set(ref(db,'threads/'+id+'/messages'), msgsObj); } catch(e){}
+          }
+        }
+      }
+      renderThreadList();
+      renderMainArea();
+    }
+
+    /* ── MAIN AREA ── */
+    function renderMainArea(){
+      var noThread = document.getElementById('no-thread');
+      var threadView = document.getElementById('thread-view');
+
+      if(!currentThreadId){
+        noThread.style.display = 'grid';
+        threadView.style.display = 'none';
+        return;
+      }
+      var t = allThreads.find(function(x){ return x.id === currentThreadId; });
+      if(!t){
+        noThread.style.display = 'grid';
+        threadView.style.display = 'none';
+        return;
+      }
+
+      noThread.style.display = 'none';
+      threadView.style.display = 'flex';
+
+      var otherName = isAdmin() ? t.username : 'ZxeDev';
+      document.getElementById('conv-avatar').textContent = otherName.substring(0,2).toUpperCase();
+      document.getElementById('conv-name').textContent = isAdmin() ? t.username : t.subject;
+      document.getElementById('conv-sub').innerHTML = isAdmin()
+        ? '<span style="color:var(--text-dim);font-size:12px;">Re: '+escapeHtml(t.subject)+'</span>'
+        : '<span style="color:var(--green);font-size:12px;">● ZxeDev</span>';
+
+      var body = document.getElementById('msg-body');
+      var msgs = t.messages || [];
+      if(msgs.length === 0){
+        body.innerHTML = '<div class="msg-empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" stroke="#ff5555" stroke-width="1.3" fill="none"/></svg><p>No messages yet. Start the conversation!</p></div>';
+      } else {
+        var html = '';
+        msgs.forEach(function(m){
+          var isMe = m.sender.toLowerCase() === (currentSession.username.toLowerCase());
+          var isAdminMsg = m.sender.toLowerCase() === ADMIN_USERNAME;
+          var initials = m.sender.substring(0,2).toUpperCase();
+          var avatarClass = isAdminMsg ? 'bubble-avatar admin' : 'bubble-avatar';
+          var bubbleClass = isMe ? 'bubble me' : (isAdminMsg ? 'bubble admin-bubble' : 'bubble');
+          var adminTag = isAdminMsg ? '<span class="admin-badge" style="margin-left:6px;">👑 Admin</span>' : '';
+          var imgsHtml = '';
+          if(m.images && m.images.length > 0){
+            m.images.forEach(function(src){
+              imgsHtml += '<img src="'+src+'" class="bubble-img" onclick="window._openLightbox(this.src)" alt="image"/>';
+            });
+          }
+          var textHtml = m.text ? '<div class="'+bubbleClass+'">'+escapeHtml(m.text)+imgsHtml+'</div>' : (imgsHtml ? '<div class="'+bubbleClass+' img-only">'+imgsHtml+'</div>' : '');
+          html += '<div class="bubble-wrap'+(isMe?' me':'')+'">' +
+            '<div class="'+avatarClass+'">'+initials+'</div>'+
+            '<div>'+
+              textHtml+
+              '<div class="bubble-meta">'+escapeHtml(m.sender)+adminTag+' · '+timeAgo(m.timestamp)+'</div>'+
+            '</div>'+
+          '</div>';
+        });
+        body.innerHTML = html;
+        body.scrollTop = body.scrollHeight;
+      }
+
+      // Image upload setup
+      if(!window._pendingImages) window._pendingImages = {};
+      if(!window._pendingImages[t.id]) window._pendingImages[t.id] = [];
+      var imgInput = document.getElementById('img-upload-input');
+      var preview = document.getElementById('msg-img-preview');
+      preview.innerHTML = ''; preview.style.display = 'none';
+      // Re-render any existing pending previews for this thread
+      window._pendingImages[t.id].forEach(function(b64, idx){
+        var item = document.createElement('div');
+        item.className = 'preview-item';
+        item.innerHTML = '<img src="'+b64+'"/><button class="preview-remove" data-idx="'+idx+'">✕</button>';
+        item.querySelector('.preview-remove').addEventListener('click', function(){
+          window._pendingImages[t.id].splice(parseInt(this.dataset.idx), 1);
+          item.remove();
+          if(window._pendingImages[t.id].length === 0) preview.style.display = 'none';
+          preview.querySelectorAll('.preview-remove').forEach(function(btn, i){ btn.dataset.idx = i; });
+        });
+        preview.appendChild(item);
+        preview.style.display = 'flex';
+      });
+      if(imgInput) {
+        imgInput.onchange = null;
+        imgInput.value = '';
+        imgInput.addEventListener('change', function(){
+          var tid = t.id;
+          Array.from(this.files).forEach(function(file){
+            if(!file.type.startsWith('image/')) return;
+            if(file.size > 900*1024){ alert('Image too large (max 900KB).'); return; }
+            var reader = new FileReader();
+            reader.onload = function(e){
+              var b64 = e.target.result;
+              window._pendingImages[tid].push(b64);
+              var item = document.createElement('div');
+              item.className = 'preview-item';
+              var idx = window._pendingImages[tid].length - 1;
+              item.innerHTML = '<img src="'+b64+'"/><button class="preview-remove" data-idx="'+idx+'">✕</button>';
+              item.querySelector('.preview-remove').addEventListener('click', function(){
+                window._pendingImages[tid].splice(parseInt(this.dataset.idx), 1);
+                item.remove();
+                if(window._pendingImages[tid].length === 0) preview.style.display = 'none';
+                preview.querySelectorAll('.preview-remove').forEach(function(btn, i){ btn.dataset.idx = i; });
+              });
+              preview.appendChild(item);
+              preview.style.display = 'flex';
+            };
+            reader.readAsDataURL(file);
+          });
+          this.value = '';
+        });
+      }
+
+      document.getElementById('reply-input').value = '';
+      document.getElementById('reply-send-btn').onclick = function(){ sendReply(t.id); };
+      document.getElementById('reply-input').onkeydown = function(e){
+        if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendReply(t.id); }
+      };
+    }
+
+    async function sendReply(tid){
+      var input = document.getElementById('reply-input');
+      var preview = document.getElementById('msg-img-preview');
+      var text = (input.value||'').trim();
+      var imgs = (window._pendingImages && window._pendingImages[tid]) ? window._pendingImages[tid].slice() : [];
+      if(!text && imgs.length === 0) return;
+      input.value = '';
+      if(preview){ preview.innerHTML = ''; preview.style.display = 'none'; }
+      if(window._pendingImages) window._pendingImages[tid] = [];
+      var msg = { sender: currentSession.username, text: text, timestamp: Date.now(), readByUser: isAdmin() };
+      if(imgs.length > 0) msg.images = imgs;
+      await dbPushMessage(tid, msg);
+      if(isAdmin()) await dbUpdateThread(tid, { readByAdmin: true });
+    }
+
+    /* ── NEW MESSAGE MODAL ── */
+    var newMsgOverlay = document.getElementById('modal-new-msg');
+    document.getElementById('modal-newmsg-close').addEventListener('click', closeNewMsgModal);
+    newMsgOverlay.addEventListener('click', function(e){ if(e.target===newMsgOverlay) closeNewMsgModal(); });
+
+    var newMsgImages = [];
+
+    function setupNewMsgImgInput(){
+      var inp = document.getElementById('newmsg-img-input');
+      var prev = document.getElementById('newmsg-img-preview');
+      var count = document.getElementById('newmsg-img-count');
+      if(!inp) return;
+      inp.addEventListener('change', function(){
+        Array.from(this.files).forEach(function(file){
+          if(!file.type.startsWith('image/')) return;
+          if(file.size > 900*1024){ alert('Image too large (max 900KB).'); return; }
+          var reader = new FileReader();
+          reader.onload = function(e){
+            var b64 = e.target.result;
+            newMsgImages.push(b64);
+            var item = document.createElement('div');
+            item.className = 'preview-item';
+            var idx = newMsgImages.length - 1;
+            item.innerHTML = '<img src="'+b64+'"/><button class="preview-remove" data-idx="'+idx+'">✕</button>';
+            item.querySelector('.preview-remove').addEventListener('click', function(){
+              newMsgImages.splice(parseInt(this.dataset.idx), 1);
+              item.remove();
+              prev.querySelectorAll('.preview-remove').forEach(function(btn,i){ btn.dataset.idx = i; });
+              count.textContent = newMsgImages.length > 0 ? newMsgImages.length+' image(s)' : '';
+            });
+            prev.appendChild(item);
+            count.textContent = newMsgImages.length+' image(s)';
+          };
+          reader.readAsDataURL(file);
+        });
+        this.value = '';
+      });
+    }
+    setupNewMsgImgInput();
+
+    function openNewMsgModal(){
+      newMsgOverlay.classList.add('open');
+      document.getElementById('newmsg-subject').value = '';
+      document.getElementById('newmsg-body').value = '';
+      document.getElementById('newmsg-error').classList.remove('show');
+      newMsgImages = [];
+      var prev = document.getElementById('newmsg-img-preview');
+      var count = document.getElementById('newmsg-img-count');
+      if(prev) prev.innerHTML = '';
+      if(count) count.textContent = '';
+    }
+    function closeNewMsgModal(){ newMsgOverlay.classList.remove('open'); }
+
+    document.getElementById('newmsg-send-btn').addEventListener('click', async function(){
+      if(!isLoggedIn()){ return; }
+      var subject = (document.getElementById('newmsg-subject').value||'').trim();
+      var bodyText = (document.getElementById('newmsg-body').value||'').trim();
+      if(!subject && !bodyText && newMsgImages.length === 0){
+        document.getElementById('newmsg-error').textContent = 'Please fill in subject and message.';
+        document.getElementById('newmsg-error').classList.add('show');
+        return;
+      }
+      if(!subject){
+        document.getElementById('newmsg-error').textContent = 'Please add a subject.';
+        document.getElementById('newmsg-error').classList.add('show');
+        return;
+      }
+      var now = Date.now();
+      var id = 'thread_'+now+'_'+Math.random().toString(36).substr(2,6);
+      var firstMsg = { sender: currentSession.username, text: bodyText, timestamp: now, readByUser: false };
+      if(newMsgImages.length > 0) firstMsg.images = newMsgImages.slice();
+      var thread = {
+        id: id, username: currentSession.username, subject: subject,
+        createdAt: now, updatedAt: now,
+        readByAdmin: false,
+        messages: [firstMsg]
+      };
+      await dbSaveThread(thread);
+      newMsgImages = [];
+      closeNewMsgModal();
+      currentThreadId = id;
+    });
+
+    /* ══════════════════════════════════════════
+       LOGOUT
+    ══════════════════════════════════════════ */
+    function logout(){
+      currentSession = null;
+      clearSession();
+      currentThreadId = null;
+      if(msgPage.classList.contains('open')){
+        closeMessagesPage();
+      } else {
+        renderNavAuth();
+      }
+    }
+
+    /* ══════════════════════════════════════════
+       HELPERS
+    ══════════════════════════════════════════ */
+    // Lightbox
+    window._openLightbox = function(src){
+      var lb = document.createElement('div');
+      lb.className = 'img-lightbox';
+      lb.innerHTML = '<img src="'+src+'" alt="image"/>';
+      lb.addEventListener('click', function(){ document.body.removeChild(lb); });
+      document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ document.body.removeChild(lb); document.removeEventListener('keydown',esc); } });
+      document.body.appendChild(lb);
+    };
+
+    function escapeHtml(str){
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function timeAgo(ts){
+      var d = Date.now() - ts;
+      if(d < 60000) return 'just now';
+      if(d < 3600000) return Math.floor(d/60000)+'m ago';
+      if(d < 86400000) return Math.floor(d/3600000)+'h ago';
+      return Math.floor(d/86400000)+'d ago';
+    }
+
+    /* ══════════════════════════════════════════
+       INIT NAV
+    ══════════════════════════════════════════ */
+    renderNavAuth();
+
+    /* ══════════════════════════════════════════
+       ORIGINAL SCRIPTS
+    ══════════════════════════════════════════ */
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Email
+    (function(){
+      var btn = document.getElementById('sendEmailBtn');
+      if(!btn) return;
+      var TO = 'zzxedev@gmail.com';
+      function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+      btn.addEventListener('click', function(){
+        var name  = (document.getElementById('name').value||'').trim();
+        var email = (document.getElementById('email').value||'').trim();
+        var msg   = (document.getElementById('message').value||'').trim();
+        if(!msg){ alert('Please write a message 😉'); return; }
+        if(email && !validEmail(email)){ alert('Invalid email address.'); return; }
+        var subject = 'New portfolio contact – ' + (name||'Anonymous');
+        var body = 'Name/Pseudo: '+(name||'—')+'\nEmail: '+(email||'—')+'\n\nMessage:\n'+msg;
+        window.location.href = 'mailto:'+TO+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+      });
+    })();
+
+    // Copy Discord
+    (function(){
+      var chip = document.getElementById('discordChip');
+      if(!chip) return;
+      chip.addEventListener('click', function(){
+        var text = 'https://discord.gg/T6GdFZD7X9';
+        function showToast(){ chip.classList.add('copied'); setTimeout(function(){ chip.classList.remove('copied'); }, 2200); }
+        if(navigator.clipboard){ navigator.clipboard.writeText(text).then(showToast).catch(showToast); }
+        else { var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast(); }
+      });
+    })();
+
+    // Back to top
+    (function(){
+      var btn = document.getElementById('back-top');
+      if(!btn) return;
+      window.addEventListener('scroll', function(){ btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+      btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    })();
+
+    // Animated counters
+    (function(){
+      var els = document.querySelectorAll('.stat .value[data-target]');
+      if(!els.length || !window.IntersectionObserver) return;
+      function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+      function animate(el){
+        var target = parseInt(el.dataset.target, 10);
+        var suffix = el.dataset.suffix || '';
+        var dur = 1500; var t0 = performance.now();
+        (function step(now){
+          var p = Math.min((now - t0) / dur, 1);
+          el.textContent = Math.round(easeOut(p) * target) + suffix;
+          if(p < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        })(t0);
+      }
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ animate(e.target); obs.unobserve(e.target); } });
+      }, { threshold: 0.6 });
+      els.forEach(function(el){ obs.observe(el); });
+    })();
+
+    // Custom cursor
+    (function(){
+      var dot = document.getElementById('cursor-dot');
+      var ring = document.getElementById('cursor-ring');
+      if(!dot || !ring) return;
+      if(!window.matchMedia('(pointer:fine)').matches) return;
+      var mx = -200, my = -200, rx = -200, ry = -200;
+      document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+      (function lerpRing(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(lerpRing); })();
+      document.addEventListener('mousedown', function(){ dot.classList.add('clicking'); ring.classList.add('clicking'); });
+      document.addEventListener('mouseup', function(){ dot.classList.remove('clicking'); ring.classList.remove('clicking'); });
+      document.addEventListener('mouseover', function(e){
+        if(e.target.closest('a,button,.btn,.chip,.bot-card,.game,.pricing-card,.testi,.why-card,.service,.dservice,.thread-item,.dropdown-item')){
+          dot.classList.add('hovering'); ring.classList.add('hovering');
+        } else { dot.classList.remove('hovering'); ring.classList.remove('hovering'); }
+      });
+    })();
+
+    // Particles
+    (function(){
+      var canvas = document.getElementById('particles-canvas');
+      if(!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W, H, particles = [];
+      var COLORS = ['rgba(255,85,85,','rgba(224,48,48,','rgba(255,120,80,','rgba(88,101,242,'];
+      function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+      window.addEventListener('resize', resize, {passive:true}); resize();
+      function Particle(){ this.reset(); }
+      Particle.prototype.reset = function(){ this.x=Math.random()*W; this.y=Math.random()*H; this.r=Math.random()*1.6+.4; this.vx=(Math.random()-.5)*.35; this.vy=-Math.random()*.4-.1; this.alpha=Math.random()*.5+.1; this.color=COLORS[Math.floor(Math.random()*COLORS.length)]; };
+      Particle.prototype.update = function(){ this.x+=this.vx; this.y+=this.vy; this.alpha-=.0008; if(this.y<-10||this.alpha<=0) this.reset(); };
+      Particle.prototype.draw = function(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=this.color+this.alpha+')'; ctx.fill(); };
+      for(var i=0;i<90;i++){ var p=new Particle(); p.y=Math.random()*H; particles.push(p); }
+      (function frame(){ ctx.clearRect(0,0,W,H); particles.forEach(function(p){ p.update(); p.draw(); }); requestAnimationFrame(frame); })();
+    })();
+
+    // Last online
+    (function(){
+      var el = document.getElementById('last-online-text');
+      if(el) el.innerHTML = 'Last seen on Discord: <b>today</b>';
+    })();
+
+    // Language toggle
+    function initLangToggle(){
+      var btn = document.getElementById('lang-toggle');
+      if(!btn) return;
+      var flag = document.getElementById('lang-flag');
+      var label = document.getElementById('lang-label');
+      var lang = 'en';
+      var T = {
+        en: { nav_stats:'Stats',nav_games:'Games',nav_portfolio:'Portfolio',nav_services:'Services',nav_why:'Why Me',nav_pricing:'Pricing',nav_reviews:'Reviews',nav_contact:'Contact',chip_dev:'Developer',chip_ui:'UI/UX',chip_online:'Online',why_title:'Why choose me?',why_sub:"Here's what makes me different from other developers.",why1_title:'Fast Delivery',why1_desc:'I work efficiently and respect deadlines. Most projects are delivered ahead of schedule — no long waits, no empty promises.',why2_title:'Clean & Maintainable Code',why2_desc:"No spaghetti code. Everything is modular, well-commented, and easy to extend. You own what I build — no black boxes.",why3_title:'Real Experience, Proven Results',why3_desc:"51M+ visits across projects I've worked on. I know what players expect and how to build systems that scale and perform.",why4_title:'Always Communicating',why4_desc:"I stay active on Discord and keep you updated throughout. If something needs adjusting, just say so — revisions are part of the deal." },
+        fr: { nav_stats:'Stats',nav_games:'Jeux',nav_portfolio:'Portfolio',nav_services:'Services',nav_why:'Pourquoi moi',nav_pricing:'Tarifs',nav_reviews:'Avis',nav_contact:'Contact',chip_dev:'Développeur',chip_ui:'UI/UX',chip_online:'En ligne',why_title:'Pourquoi me choisir ?',why_sub:'Voici ce qui me distingue des autres développeurs.',why1_title:'Livraison rapide',why1_desc:"Je travaille efficacement et respecte les délais. La plupart des projets sont livrés en avance — pas d'attente interminable.",why2_title:'Code propre & maintenable',why2_desc:"Pas de code spaghetti. Tout est modulaire, commenté et facile à étendre. Tu possèdes ce que je construis.",why3_title:'Expérience réelle, résultats prouvés',why3_desc:"51M+ visites sur mes projets. Je sais ce qu'attendent les joueurs et comment construire des systèmes qui scalent.",why4_title:'Communication permanente',why4_desc:"Je suis actif sur Discord et te tiens informé. Si quelque chose doit être ajusté, dis-le — les révisions font partie du deal." }
+      };
+      function applyLang(l){
+        var t = T[l];
+        document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(t[k]!==undefined) el.innerHTML=t[k]; });
+      }
+      btn.addEventListener('click', function(){
+        lang = lang==='en'?'fr':'en';
+        flag.textContent = lang==='en'?'🇫🇷':'🇬🇧';
+        label.textContent = lang==='en'?'FR':'EN';
+        applyLang(lang);
+      });
+    }
+    initLangToggle();
+
+  </script>
+</body>
+</html>
