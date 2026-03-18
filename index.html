@@ -6,6 +6,7 @@
   <title>Portfolio – ZxeDev</title>
   <meta name="description" content="Portfolio of a Roblox developer – scripting, UI/UX and optimization." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" type="image/png" sizes="32x32" href="https://image.noelshack.com/fichiers/2025/46/3/1762948017-70ac2cbe2638cb574e992c802a2265ca.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
@@ -1100,9 +1101,16 @@
         pending2FAUser={key:u,data:{...user,connections}};
         const code=generateCode();
         pending2FACode=code;
-        // Demo: show code in a toast since no real mail server
-        closeAuthModal();
-        open2FAModal(user.twoFA.email, code);
+        async function open2FAModal(email, code) {
+  // Envoyer le vrai email via EmailJS
+  await emailjs.send('service_8xek64h', 'template_oncmtgn', {
+    to_email: email,
+    code: code
+  }, 'br8Na3k6vjfdvPzN2');
+
+  document.getElementById('twofa-info').textContent = `A code has been sent to ${email}`;
+  // ... reste du code inchangé
+}
       } else {
         currentSession={username:user.username,isAdmin:!!user.isAdmin};saveSession(currentSession);
         showOk('login-success','Welcome back, '+user.username+'! 👋');
