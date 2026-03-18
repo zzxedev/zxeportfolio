@@ -205,11 +205,11 @@
     .date-sep::before,.date-sep::after{ content:''; flex:1; height:1px; background:rgba(200,50,50,.1); }
     /* Bubble */
     .bubble-group{ display:flex; flex-direction:column; gap:2px; margin-bottom:8px; }
-    .bubble-wrap{ display:flex; align-items:flex-end; gap:8px; width:100%; }
+    .bubble-wrap{ display:flex; align-items:flex-start; gap:8px; width:100%; margin-bottom:6px; }
     .bubble-wrap.me{ flex-direction:row-reverse; }
-    .bubble-wrap + .bubble-wrap{ margin-top:2px; }
+    .bubble-wrap + .bubble-wrap{ margin-bottom:4px; }
     .bubble-wrap.me .bubble-avatar{ display:none; }
-    .bubble-wrap:not(.me) .bubble-avatar{ display:grid; }
+    .bubble-wrap:not(.me) .bubble-avatar{ display:grid; flex-shrink:0; margin-top:2px; }
     .bubble-avatar{ width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#3a1010,#1a0505); border:1px solid rgba(200,50,50,.2); place-items:center; font-weight:800; font-size:12px; color:var(--accent); flex-shrink:0; }
     .bubble-avatar.admin{ background:linear-gradient(135deg,#2a0505,#5a0000); color:#faa61a; border-color:rgba(250,166,26,.25); }
     .bubble{
@@ -1639,10 +1639,10 @@
 
           html+=`<div class="bubble-wrap${isMe?' me':''}" data-idx="${realIdx}">
             <div class="${avatarClass}">${initials}</div>
-            <div style="max-width:68%;display:flex;flex-direction:column;align-items:${isMe?'flex-end':'flex-start'}">
+            <div style="max-width:68%;display:flex;flex-direction:column;align-items:${isMe?'flex-end':'flex-start'};min-width:0;">
               <div class="${bubbleClass}" style="position:relative;">${actHtml}${textContent}</div>
               ${reactHtml}
-              <div class="bubble-meta" style="${isMe?'text-align:right;justify-content:flex-end':''}">
+              <div class="bubble-meta" style="${isMe?'justify-content:flex-end;':''}">
                 <span title="${fullTime}">${timeAgo(m.timestamp)}</span>
                 ${adminTag}${noteLabel}${tickHtml}
               </div>
