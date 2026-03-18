@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" type="image/png" sizes="32x32" href="https://image.noelshack.com/fichiers/2025/46/3/1762948017-70ac2cbe2638cb574e992c802a2265ca.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('br8Na3k6vjfdvPzN2');</script>
   <style>
     :root{
       --bg-1:#050507;--bg-2:#0d0d0f;--glass:#0e0b0baa;--text:#f0e8e8;--text-dim:#a89090;
@@ -542,7 +544,7 @@
         </div>
         <div id="twofa-setup-section">
           <div class="field"><label>Your Email (to receive codes)</label><input type="email" id="twofa-email-input" placeholder="your@email.com"/></div>
-          <p style="font-size:12px;color:var(--text-dim);margin:0 0 14px;">⚠️ Note: Since this is a demo without a real mail server, the code will be displayed in a notification instead of being sent by email. In production, integrate a mail service like SendGrid.</p>
+          <p style="font-size:12px;color:var(--text-dim);margin:0 0 14px;">Lorsque la 2FA est activée, un code à 6 chiffres sera envoyé à ton adresse email à chaque connexion.</p>
           <button class="btn" style="width:100%;justify-content:center;" id="twofa-toggle-btn">Enable 2FA</button>
         </div>
       </div>
@@ -1135,11 +1137,19 @@
     document.getElementById('modal-2fa-close').addEventListener('click',()=>{twofaOverlay.classList.remove('open');pending2FAUser=null;pending2FACode=null;});
     twofaOverlay.addEventListener('click',e=>{if(e.target===twofaOverlay){twofaOverlay.classList.remove('open');pending2FAUser=null;pending2FACode=null;}});
 
-    function open2FAModal(email, code){
+    async function open2FAModal(email, code){
       document.getElementById('twofa-error').classList.remove('show');
-      document.getElementById('twofa-info').textContent=`Demo mode: your code is ${code} (normally sent to ${email})`;
+      document.getElementById('twofa-info').textContent=`Sending code to ${email}…`;
       ['twofa-d1','twofa-d2','twofa-d3','twofa-d4','twofa-d5','twofa-d6'].forEach(id=>{document.getElementById(id).value='';});
       twofaOverlay.classList.add('open');
+      try{
+        await emailjs.send('service_8xek64h','template_oncmtgn',{to_email:email,code:code});
+        document.getElementById('twofa-info').textContent=`A 6-digit code has been sent to ${email}`;
+      }catch(err){
+        console.error('EmailJS error:',err);
+        document.getElementById('twofa-info').textContent=`Failed to send email. Check your address or try again.`;
+        showErr('twofa-error','Email sending failed. Please try again.');
+      }
       setTimeout(()=>document.getElementById('twofa-d1').focus(),100);
     }
 
@@ -1172,8 +1182,19 @@
         renderNavAuth();
       }
     });
-    document.getElementById('twofa-resend-btn').addEventListener('click',()=>{
-      if(pending2FAUser){const code=generateCode();pending2FACode=code;document.getElementById('twofa-info').textContent=`New code generated (demo): ${code}`;showErr('twofa-error','');document.getElementById('twofa-error').classList.remove('show');}
+    document.getElementById('twofa-resend-btn').addEventListener('click',async()=>{
+      if(pending2FAUser){
+        const code=generateCode();pending2FACode=code;
+        document.getElementById('twofa-error').classList.remove('show');
+        document.getElementById('twofa-info').textContent=`Resending code to ${pending2FAUser.data.twoFA.email}…`;
+        try{
+          await emailjs.send('service_8xek64h','template_oncmtgn',{to_email:pending2FAUser.data.twoFA.email,code:code});
+          document.getElementById('twofa-info').textContent=`A new code has been sent to ${pending2FAUser.data.twoFA.email}`;
+        }catch(err){
+          document.getElementById('twofa-info').textContent=`Failed to resend. Please try again.`;
+          showErr('twofa-error','Email sending failed.');
+        }
+      }
     });
 
     /* ── PROFILE MODAL ── */
