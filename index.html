@@ -195,7 +195,7 @@
     .typing-dots span:nth-child(3){ animation-delay:.4s; }
     @keyframes typing-dot{ 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-4px)} }
     /* Messages */
-    .msg-body{ flex:1; overflow-y:auto; padding:16px 20px; display:flex; flex-direction:column; gap:4px; }
+    .msg-body{ flex:1; overflow-y:auto; padding:16px 20px 8px; display:flex; flex-direction:column; gap:2px; }
     .msg-empty{ display:grid; place-items:center; height:100%; text-align:center; color:var(--text-dim); }
     .msg-empty svg{ opacity:.2; margin-bottom:16px; }
     .msg-empty p{ margin:0; font-size:15px; }
@@ -205,23 +205,26 @@
     .date-sep::before,.date-sep::after{ content:''; flex:1; height:1px; background:rgba(200,50,50,.1); }
     /* Bubble */
     .bubble-group{ display:flex; flex-direction:column; gap:2px; margin-bottom:8px; }
-    .bubble-wrap{ display:flex; align-items:flex-end; gap:8px; }
+    .bubble-wrap{ display:flex; align-items:flex-end; gap:8px; width:100%; }
     .bubble-wrap.me{ flex-direction:row-reverse; }
     .bubble-wrap + .bubble-wrap{ margin-top:2px; }
-    .bubble-wrap.me .bubble-avatar{ visibility:hidden; }
-    .bubble-avatar{ width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#3a1010,#1a0505); border:1px solid rgba(200,50,50,.2); display:grid; place-items:center; font-weight:800; font-size:12px; color:var(--accent); flex-shrink:0; }
+    .bubble-wrap.me .bubble-avatar{ display:none; }
+    .bubble-wrap:not(.me) .bubble-avatar{ display:grid; }
+    .bubble-avatar{ width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#3a1010,#1a0505); border:1px solid rgba(200,50,50,.2); place-items:center; font-weight:800; font-size:12px; color:var(--accent); flex-shrink:0; }
     .bubble-avatar.admin{ background:linear-gradient(135deg,#2a0505,#5a0000); color:#faa61a; border-color:rgba(250,166,26,.25); }
     .bubble{
-      max-width:70%; padding:10px 13px; border-radius:16px; font-size:14px; line-height:1.55;
+      max-width:100%; padding:10px 13px; border-radius:16px; font-size:14px; line-height:1.55;
       background:rgba(180,20,20,.1); border:1px solid rgba(200,50,50,.18); color:var(--text);
       animation:bubbleIn .18s ease; transform-origin:bottom left; position:relative;
+      word-break:break-word; overflow-wrap:break-word;
     }
     .bubble-wrap.me .bubble{ transform-origin:bottom right; }
     @keyframes bubbleIn{ from{opacity:0;transform:scale(.94) translateY(4px)} to{opacity:1;transform:scale(1) translateY(0)} }
-    .bubble.me{ background:linear-gradient(135deg,rgba(224,48,48,.18),rgba(180,20,20,.1)); border-color:rgba(220,50,50,.3); }
-    .bubble.admin-bubble{ background:linear-gradient(135deg,rgba(250,166,26,.1),rgba(200,100,0,.06)); border-color:rgba(250,166,26,.22); }
+    .bubble.me{ background:linear-gradient(135deg,rgba(224,48,48,.22),rgba(180,20,20,.14)); border-color:rgba(220,50,50,.35); border-radius:16px 4px 16px 16px; }
+    .bubble:not(.me){ border-radius:4px 16px 16px 16px; }
+    .bubble.admin-bubble{ background:linear-gradient(135deg,rgba(250,166,26,.1),rgba(200,100,0,.06)); border-color:rgba(250,166,26,.22); border-radius:4px 16px 16px 16px; }
     .bubble.note-bubble{ background:linear-gradient(135deg,rgba(88,101,242,.1),rgba(60,70,200,.05)); border-color:rgba(88,101,242,.22); border-style:dashed; }
-    .bubble.img-only{ background:transparent!important; border:none!important; padding:0!important; }
+    .bubble.img-only{ background:transparent!important; border:none!important; padding:4px 0!important; border-radius:0!important; }
     /* Quoted reply */
     .bubble-quote{ background:rgba(0,0,0,.2); border-left:3px solid rgba(200,50,50,.5); border-radius:8px; padding:6px 10px; margin-bottom:7px; font-size:12px; color:var(--text-dim); cursor:pointer; }
     .bubble-quote:hover{ background:rgba(0,0,0,.3); }
@@ -251,8 +254,8 @@
     /* Admin badge */
     .admin-badge{ display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:999px; font-size:11px; font-weight:800; background:linear-gradient(90deg,#7a4a00,#4a2d00); border:1px solid rgba(250,166,26,.3); color:#faa61a; }
     /* Images in bubbles */
-    .bubble-img{ max-width:220px; max-height:200px; border-radius:10px; display:block; cursor:pointer; margin-top:6px; border:1px solid rgba(200,50,50,.2); transition:transform .15s; }
-    .bubble-img:hover{ transform:scale(1.02); }
+    .bubble-img{ max-width:min(220px,100%); max-height:200px; border-radius:12px; display:block; cursor:pointer; margin-top:4px; border:1px solid rgba(200,50,50,.18); transition:transform .15s,box-shadow .15s; object-fit:cover; }
+    .bubble-img:hover{ transform:scale(1.02); box-shadow:0 4px 16px rgba(0,0,0,.4); }
     /* Lightbox */
     .img-lightbox{ position:fixed; inset:0; z-index:99000; background:rgba(0,0,0,.88); display:grid; place-items:center; cursor:zoom-out; backdrop-filter:blur(6px); }
     .img-lightbox img{ max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.8); }
@@ -1636,10 +1639,10 @@
 
           html+=`<div class="bubble-wrap${isMe?' me':''}" data-idx="${realIdx}">
             <div class="${avatarClass}">${initials}</div>
-            <div style="max-width:70%">
+            <div style="max-width:68%;display:flex;flex-direction:column;align-items:${isMe?'flex-end':'flex-start'}">
               <div class="${bubbleClass}" style="position:relative;">${actHtml}${textContent}</div>
               ${reactHtml}
-              <div class="bubble-meta">
+              <div class="bubble-meta" style="${isMe?'text-align:right;justify-content:flex-end':''}">
                 <span title="${fullTime}">${timeAgo(m.timestamp)}</span>
                 ${adminTag}${noteLabel}${tickHtml}
               </div>
