@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio – ZxeDev</title>
+  <title>ZxeDev — Roblox Developer Portfolio</title>
   <meta name="description" content="Portfolio of a Roblox developer – scripting, UI/UX and optimization." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" type="image/png" sizes="32x32" href="https://image.noelshack.com/fichiers/2026/26/3/1782334278-7867852.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>emailjs.init('br8Na3k6vjfdvPzN2');</script>
   <style>
@@ -425,11 +425,543 @@
     @media(max-width:900px){.profile{flex-direction:column;text-align:center;}.p-col{text-align:center;}.grid .card{grid-column:span 12;}.game{grid-column:span 6;}.service{grid-column:span 6;}.bot-card{grid-column:span 12;}.discord-cta{flex-direction:column;text-align:center;}.discord-cta-actions{justify-content:center;}.testi{grid-column:span 6;}.pricing-grid{grid-template-columns:1fr;width:min(420px,100%);}.why-grid{grid-template-columns:1fr;}.msg-layout{grid-template-columns:1fr;}.msg-sidebar{display:none;}.msg-sidebar.mobile-open{display:block;position:fixed;inset:0;top:61px;z-index:20;}}
     @media(max-width:640px){.hero{padding-top:28px;}.profile{gap:12px;}.avatar{width:84px;height:84px;border-radius:18px;}.grid .card,.game,.service{grid-column:span 12;}.stat{grid-column:span 12;}.intro h1{font-size:36px;}.bot-card{grid-column:span 12;}.dservice{grid-column:span 12;}.testi{grid-column:span 12;}nav{display:none;}}
   </style>
+
+<style id="zxedev-2026-redesign">
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZXEDEV PORTFOLIO — COMPLETE 2026 REDESIGN
+   Direction: editorial developer dashboard / electric blue + acid lime
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --bg-1:#070910;
+  --bg-2:#0b0f19;
+  --glass:rgba(13,18,31,.82);
+  --text:#f7f8fc;
+  --text-dim:#98a2b8;
+  --primary:#7687ff;
+  --primary-2:#5267ff;
+  --accent:#b9ff66;
+  --green:#75f0ad;
+  --danger:#ff6f91;
+  --chip:#121827;
+  --card-stroke:rgba(148,163,184,.18);
+  --surface:#0f1421;
+  --surface-2:#141b2c;
+  --surface-3:#1a2236;
+  --line:rgba(148,163,184,.16);
+  --line-strong:rgba(148,163,184,.28);
+  --cyan:#64e5e8;
+  --orange:#ffbf69;
+  --radius-xl:28px;
+  --radius-lg:20px;
+  --radius-md:14px;
+  --shadow:0 28px 80px rgba(0,0,0,.34);
+  --discord:#7889ff;
+  --discord-dark:#5567e9;
+  --discord-glow:rgba(120,137,255,.24);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(900px 560px at 88% -5%,rgba(118,135,255,.18),transparent 64%),
+    radial-gradient(700px 500px at -8% 22%,rgba(100,229,232,.09),transparent 65%),
+    linear-gradient(180deg,#070910 0%,#090c14 48%,#070910 100%);
+  font-family:"Manrope",Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.026) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:linear-gradient(to bottom,black,transparent 88%);
+}
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(7,9,16,.36),transparent 18%,transparent 82%,rgba(7,9,16,.36));
+}
+::selection{background:var(--accent);color:#0a0d14}
+
+.container{width:min(1220px,calc(100vw - 40px));margin-inline:auto;position:relative;z-index:1}
+
+/* Intro */
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  background:#070910;
+  animation:introFade 2.15s cubic-bezier(.7,0,.2,1) .3s forwards;
+  backdrop-filter:none;
+}
+.intro:before{
+  content:"";
+  position:absolute;
+  width:min(720px,82vw);
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--primary),var(--accent),transparent);
+  box-shadow:0 0 40px rgba(118,135,255,.45);
+  animation:introScan 1.35s ease both;
+}
+@keyframes introScan{from{transform:translateY(-120px) scaleX(.2);opacity:0}55%{opacity:1}to{transform:translateY(120px) scaleX(1);opacity:0}}
+@keyframes introFade{70%{opacity:1}100%{opacity:0;pointer-events:none;visibility:hidden}}
+.intro h1{font:700 clamp(34px,6vw,74px)/1 "Space Grotesk",sans-serif;letter-spacing:-.055em;margin:0;text-transform:uppercase}
+.intro h1 .gradient{background:linear-gradient(90deg,var(--primary),var(--cyan),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.typewriter{overflow:visible;white-space:nowrap;border:0;width:auto;animation:introWord .75s cubic-bezier(.2,.75,.25,1) both}
+@keyframes introWord{from{opacity:0;transform:translateY(24px);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
+
+/* Header */
+header.nav{position:sticky;top:14px;z-index:50;background:transparent;border:0;backdrop-filter:none;padding:0}
+.nav .row{
+  min-height:68px;
+  padding:10px 12px 10px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:nowrap;
+  background:rgba(10,14,24,.82);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 18px 50px rgba(0,0,0,.24);
+  backdrop-filter:blur(18px) saturate(150%);
+}
+.brand{display:flex;align-items:center;gap:11px;font:700 15px/1 "Space Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.brand:before{content:"ZX";display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--accent);color:#0a0d14;font-weight:800;letter-spacing:-.06em;box-shadow:0 8px 24px rgba(185,255,102,.18)}
+.badge-dot{display:none}
+nav{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0}
+nav a{color:var(--text-dim);text-decoration:none;margin:0;padding:9px 10px;border-radius:10px;font-weight:700;font-size:12px;white-space:nowrap;transition:color .18s,background .18s,transform .18s}
+nav a:hover{color:var(--text);background:rgba(255,255,255,.055);transform:translateY(-1px)}
+.nav-auth{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-nav,#lang-toggle,.user-chip{
+  min-height:40px;
+  border-radius:11px;
+  border:1px solid var(--line-strong);
+  background:rgba(255,255,255,.035);
+  color:var(--text);
+  font:700 12px/1 "Manrope",sans-serif;
+  padding:0 14px;
+  transition:transform .18s,border-color .18s,background .18s;
+}
+.btn-nav:hover,#lang-toggle:hover,.user-chip:hover{transform:translateY(-1px);border-color:rgba(118,135,255,.58);background:rgba(118,135,255,.09)}
+.btn-nav.register,.btn-nav.messages{background:var(--text);color:#0a0d14;border-color:transparent;box-shadow:none}
+.btn-nav.register:hover,.btn-nav.messages:hover{background:var(--accent);filter:none}
+.btn-nav.login{background:transparent;color:var(--text-dim)}
+.user-chip .dot{background:var(--green);box-shadow:none}
+.dropdown-menu{top:calc(100% + 10px);background:#111725;border:1px solid var(--line-strong);border-radius:14px;padding:7px;box-shadow:var(--shadow)}
+.dropdown-item{border-radius:10px;color:var(--text-dim);padding:10px 12px}
+.dropdown-item:hover{background:rgba(118,135,255,.1);color:var(--text)}
+.dropdown-item.danger:hover{background:rgba(255,111,145,.1);color:var(--danger)}
+.dropdown-divider{background:var(--line)}
+
+/* Hero */
+.hero{
+  padding:clamp(92px,10vw,150px) 0 76px;
+  min-height:760px;
+  text-align:left;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(330px,.8fr);
+  grid-template-areas:
+    "badge profile"
+    "title profile"
+    "about profile"
+    "actions profile";
+  align-items:center;
+  column-gap:clamp(50px,8vw,110px);
+  row-gap:22px;
+}
+.available-badge{grid-area:badge;justify-self:start;margin:0;display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border-radius:10px;background:rgba(117,240,173,.08);border:1px solid rgba(117,240,173,.24);color:var(--green);font:800 12px/1 "Manrope",sans-serif;letter-spacing:.03em;text-transform:uppercase}
+.dot-pulse{width:7px;height:7px;background:var(--green);box-shadow:none}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+.hero h1{grid-area:title;font:700 clamp(54px,7.2vw,96px)/.92 "Space Grotesk",sans-serif;margin:0;letter-spacing:-.072em;max-width:820px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--text);background:none;-webkit-text-fill-color:initial;position:relative}
+.hero h1 em:after{content:"";position:absolute;left:.03em;right:.02em;bottom:.07em;height:.12em;background:linear-gradient(90deg,var(--primary),var(--cyan),var(--accent));z-index:-1;opacity:.9;border-radius:999px}
+.about{grid-area:about;margin:0;width:auto;max-width:720px;color:var(--text-dim);font-size:clamp(16px,1.6vw,19px);line-height:1.75}
+.about b{color:var(--text);font-weight:800}
+.about em{color:var(--accent);font-weight:800}
+.hero>.grid{grid-area:actions;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.hero>.grid .card{grid-column:auto;min-height:154px;padding:22px;background:rgba(15,20,33,.64);border:1px solid var(--line);border-radius:18px;box-shadow:none;display:flex;flex-direction:column;align-items:flex-start}
+.hero>.grid .card:after{display:none}
+.hero>.grid .card h3{margin:0 0 7px;font:700 17px/1.2 "Space Grotesk",sans-serif;letter-spacing:-.025em}
+.hero>.grid .card p{margin:0 0 18px;color:var(--text-dim);font-size:13px;flex:1}
+.profile{
+  grid-area:profile;
+  margin:0;
+  width:100%;
+  min-height:520px;
+  padding:34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  gap:24px;
+  text-align:left;
+  border-radius:28px;
+  border:1px solid var(--line-strong);
+  background:
+    linear-gradient(180deg,rgba(8,11,19,.03) 15%,rgba(8,11,19,.9) 88%),
+    radial-gradient(circle at 65% 10%,rgba(118,135,255,.32),transparent 38%),
+    linear-gradient(145deg,#151d31,#0c111d 72%);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  isolation:isolate;
+}
+.profile:before{content:"ZXE.DEV";position:absolute;inset:auto auto 26px -7px;padding:0;background:none;mask:none;-webkit-mask:none;color:rgba(255,255,255,.026);font:800 82px/.8 "Space Grotesk",sans-serif;letter-spacing:-.08em;transform:rotate(-90deg);transform-origin:left bottom;z-index:-1}
+.profile:after{content:"";position:absolute;width:260px;height:260px;right:-80px;top:-70px;border:1px solid rgba(185,255,102,.26);border-radius:50%;box-shadow:0 0 0 42px rgba(118,135,255,.045),0 0 0 84px rgba(118,135,255,.025);z-index:-1}
+.avatar{flex:0 0 132px;width:132px;height:132px;border-radius:28px;background:var(--surface-3);border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 45px rgba(0,0,0,.34);transform:rotate(-2deg)}
+.avatar img{filter:saturate(.86) contrast(1.04)}
+.p-col{width:100%;text-align:left;position:relative;z-index:1}
+.p-top{display:flex;align-items:center;gap:11px}
+.name{font:700 34px/1 "Space Grotesk",sans-serif;letter-spacing:-.045em}
+.verified{padding:5px 8px;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--text-dim);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+.verified svg{width:14px;height:14px}
+.chips{gap:7px;margin-top:14px}
+.chip,.meta .tag,.bot-tag{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:8px;background:rgba(255,255,255,.045);color:var(--text-dim);border:1px solid var(--line);font:700 11px/1 "Manrope",sans-serif;letter-spacing:.02em}
+.chip .dot{background:var(--green);box-shadow:none}
+.chip-discord:hover{border-color:rgba(120,137,255,.6);background:rgba(120,137,255,.1)}
+.last-online{margin-top:11px;padding:0;border:0;background:transparent;color:var(--text-dim);font-size:11px}
+.last-online .dc-dot{background:var(--green);box-shadow:none}
+.copy-toast{background:#151c2d;border:1px solid var(--line-strong);color:var(--text)}
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:44px;
+  padding:0 17px;
+  border-radius:11px;
+  background:var(--text);
+  color:#090c14;
+  text-decoration:none;
+  font:800 12px/1 "Manrope",sans-serif;
+  border:1px solid transparent;
+  box-shadow:none;
+  transition:transform .18s,background .18s,color .18s,border-color .18s;
+}
+.btn:hover{filter:none;transform:translateY(-2px);background:var(--accent)}
+.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line-strong)}
+.btn.secondary:hover{background:rgba(255,255,255,.06);border-color:rgba(118,135,255,.65)}
+.btn.discord-btn{background:var(--discord);border:0;color:#fff}
+.btn.discord-btn:hover{background:#8b9aff}
+
+/* Shared section system */
+section{padding:94px 0}
+section:not(.hero):before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+section h2{text-align:left;font:700 clamp(34px,5vw,58px)/1 "Space Grotesk",sans-serif;letter-spacing:-.055em;margin:0 0 30px;text-wrap:balance}
+section h2:before{display:block;color:var(--accent);font:800 11px/1 "Manrope",sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+#games h2:before{content:"01 / Selected work"}
+#portfolio h2:before{content:"02 / Systems"}
+#services h2:before{content:"03 / Services"}
+#discord-bots h2:before{content:"04 / Discord development"}
+#why h2:before{content:"05 / Process"}
+#pricing h2:before{content:"06 / Pricing"}
+#testimonials h2:before{content:"07 / Feedback"}
+#contact h2:before{content:"08 / Start a project"}
+.pill-row{justify-content:flex-start;gap:7px;margin:-12px 0 28px}
+.pill-row .chip{background:transparent}
+
+/* Stats */
+.stats{padding:12px 0 76px}
+.stats:before{display:none}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;width:100%;margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--line)}
+.stat{grid-column:auto;min-height:180px;padding:24px;background:#0d121e;border:0;border-radius:0;box-shadow:none;gap:14px;transition:background .2s}
+.stat:hover{box-shadow:none;background:#111827}
+.stat:after{display:none}
+.stat .icon{width:42px;height:42px;border-radius:11px;background:rgba(118,135,255,.12);border:1px solid rgba(118,135,255,.25);box-shadow:none}
+.stat .icon svg{width:21px;height:21px}
+.stat .value{font:700 clamp(34px,4vw,48px)/1 "Space Grotesk",sans-serif;letter-spacing:-.05em;color:var(--text);margin-top:auto}
+.stat .label{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em}
+
+/* Games */
+.cards-3{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.game{grid-column:span 4;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .25s,border-color .25s,background .25s;position:relative}
+.game:hover{transform:translateY(-6px);box-shadow:none;border-color:rgba(118,135,255,.5);background:var(--surface-2)}
+.thumb{aspect-ratio:16/10;background:#111827;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(.84) contrast(1.04);transition:transform .45s,filter .45s}
+.game:hover .thumb img{transform:scale(1.045);filter:saturate(1) contrast(1.03)}
+.game .body{padding:20px}
+.game .body h3{font:700 21px/1.15 "Space Grotesk",sans-serif;letter-spacing:-.035em;margin:0 0 7px}
+.game .body p{margin:0;color:var(--text-dim);font-size:13px}
+.meta{gap:6px;margin-top:16px}
+.meta .tag{background:rgba(118,135,255,.08);border-color:rgba(118,135,255,.18);color:#b6c0ff}
+
+/* Service / portfolio */
+.service{grid-column:span 4;min-height:205px;background:transparent;border:1px solid var(--line);border-radius:18px;padding:24px;transition:background .22s,border-color .22s,transform .22s;position:relative;overflow:hidden}
+.service:before{content:"0" counter(service-card);counter-increment:service-card;display:block;color:rgba(255,255,255,.18);font:700 12px/1 "Space Grotesk",sans-serif;letter-spacing:.08em;margin-bottom:48px}
+#portfolio .cards-3,#services .cards-3{counter-reset:service-card}
+.service:hover{box-shadow:none;background:rgba(118,135,255,.055);border-color:rgba(118,135,255,.42);transform:translateY(-4px)}
+.service h4{margin:0 0 9px;color:var(--text);font:700 19px/1.2 "Space Grotesk",sans-serif;letter-spacing:-.025em;text-transform:none}
+.service p{margin:0;color:var(--text-dim);font-size:13px;line-height:1.65}
+
+/* Discord area */
+#discord-bots:before{background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+#discord-bots h2 .discord-hl{background:none;color:#9ba8ff;-webkit-text-fill-color:initial}
+.discord-intro{width:min(850px,100%);margin:-10px 0 34px;text-align:left;color:var(--text-dim);font-size:16px;line-height:1.75}
+.discord-intro b{color:var(--text)}
+.discord-intro em{color:#9ba8ff}
+.bot-grid{gap:16px;margin-bottom:24px}
+.bot-card{grid-column:span 6;background:linear-gradient(145deg,rgba(120,137,255,.1),rgba(15,20,33,.92) 42%);border:1px solid rgba(120,137,255,.22);border-radius:20px;box-shadow:none;transition:transform .25s,border-color .25s}
+.bot-card:hover{transform:translateY(-5px);box-shadow:none;border-color:rgba(120,137,255,.52)}
+.bot-card:after{display:none}
+.bot-thumb{aspect-ratio:16/8;background:#11162b}
+.bot-thumb img{filter:saturate(.86)}
+.bot-body{padding:20px 22px 23px}
+.bot-avatar{border-radius:12px;background:rgba(120,137,255,.15);border:1px solid rgba(120,137,255,.26)}
+.bot-name{font:700 18px/1.2 "Space Grotesk",sans-serif;letter-spacing:-.025em}
+.bot-status{background:rgba(117,240,173,.08);border-color:rgba(117,240,173,.22);color:var(--green)}
+.bot-desc{color:var(--text-dim);line-height:1.65}
+.bot-tag{background:rgba(120,137,255,.1);border-color:rgba(120,137,255,.2);color:#b8c1ff}
+.discord-services{gap:12px;margin-bottom:26px}
+.dservice{grid-column:span 3;min-height:175px;background:rgba(15,20,33,.65);border:1px solid var(--line);border-radius:17px;padding:20px;transition:transform .2s,border-color .2s}
+.dservice:hover{box-shadow:none;transform:translateY(-3px);border-color:rgba(120,137,255,.44)}
+.dservice .dicon{width:40px;height:40px;border-radius:10px;background:rgba(120,137,255,.13);border:1px solid rgba(120,137,255,.24);box-shadow:none}
+.dservice h4{color:var(--text);font-size:14px;margin-top:20px}
+.dservice p{font-size:12px;line-height:1.55}
+.discord-cta{width:100%;margin:0;background:var(--text);border:0;border-radius:20px;padding:32px;color:#0a0d14}
+.discord-cta:before{display:none}
+.discord-cta-text h3{font:700 24px/1.15 "Space Grotesk",sans-serif;letter-spacing:-.04em}
+.discord-cta-text p{color:#596275}
+.discord-cta .btn.discord-btn{background:#0a0d14;color:white}
+.discord-cta .btn.secondary{color:#0a0d14;border-color:rgba(10,13,20,.25)}
+.discord-cta .btn.secondary:hover{background:rgba(10,13,20,.06);border-color:#0a0d14}
+
+/* Why */
+#why:before{background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+.why-grid{grid-template-columns:repeat(2,1fr);gap:14px;width:100%;margin:0}
+.why-card{min-height:180px;background:rgba(15,20,33,.54);border:1px solid var(--line);border-radius:18px;padding:24px;gap:18px;transition:transform .2s,border-color .2s,background .2s}
+.why-card:hover{transform:translateY(-4px);box-shadow:none;border-color:rgba(185,255,102,.38);background:rgba(185,255,102,.035)}
+.why-card:after{display:none}
+.why-icon{width:46px;height:46px;border-radius:12px;background:rgba(185,255,102,.1);border:1px solid rgba(185,255,102,.22);box-shadow:none}
+.why-content h4{font:700 18px/1.2 "Space Grotesk",sans-serif;letter-spacing:-.025em}
+.why-content p{font-size:13px}
+
+/* Pricing */
+#pricing:before{background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+.pricing-grid{grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.pricing-card{min-height:550px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:27px 24px;gap:4px;transition:transform .22s,border-color .22s,background .22s;overflow:visible}
+.pricing-card:hover{transform:translateY(-5px);box-shadow:none;border-color:rgba(118,135,255,.48);background:var(--surface-2)}
+.pricing-card.featured{border-color:rgba(185,255,102,.42);background:linear-gradient(180deg,rgba(185,255,102,.07),var(--surface) 28%);box-shadow:none;transform:translateY(-12px)}
+.pricing-card.featured:hover{transform:translateY(-17px)}
+.pricing-card.featured:before{display:none}
+.pricing-badge{padding:6px 9px;border-radius:7px;background:var(--accent);color:#0a0d14;font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+.pricing-name{font:700 21px/1.2 "Space Grotesk",sans-serif;letter-spacing:-.025em;margin-top:12px}
+.pricing-price{font:700 clamp(36px,4vw,52px)/1 "Space Grotesk",sans-serif;letter-spacing:-.055em;color:var(--text);margin:16px 0 7px}
+.pricing-price span{font-size:12px;color:var(--text-dim);letter-spacing:0}
+.pricing-desc{font-size:13px;line-height:1.6}
+.pricing-features{gap:11px;margin-top:12px}
+.pricing-features li{font-size:13px}
+.pricing-features li .ck{width:18px;height:18px;border-radius:5px;background:rgba(117,240,173,.08);border-color:rgba(117,240,173,.22)}
+.pricing-note{font-size:11px}
+
+/* Testimonials */
+.testi-grid{gap:14px}
+.testi{grid-column:span 4;min-height:260px;background:transparent;border:1px solid var(--line);border-radius:18px;padding:23px;transition:transform .2s,border-color .2s,background .2s}
+.testi:hover{box-shadow:none;transform:translateY(-4px);border-color:rgba(118,135,255,.42);background:rgba(118,135,255,.035)}
+.testi-text{font-size:14px;line-height:1.72;font-style:normal;color:#c1c8d8}
+.testi-text:before{color:var(--accent);font-size:28px}
+.testi-avatar{border-radius:10px;background:var(--surface-2);border-color:var(--line)}
+.testi-name{font-size:13px}
+.testi-role{font-size:11px}
+.testi-platform{border-radius:7px;background:rgba(120,137,255,.08);border-color:rgba(120,137,255,.2);color:#b7c0ff}
+
+/* Contact */
+#contact{padding-bottom:120px}
+.contact{width:100%;max-width:none;margin:0;padding:36px;background:linear-gradient(135deg,rgba(118,135,255,.1),rgba(15,20,33,.86) 42%);border:1px solid rgba(118,135,255,.22);border-radius:24px;gap:14px;position:relative;overflow:hidden}
+.contact:after{content:"LET'S BUILD";position:absolute;right:-12px;bottom:-25px;color:rgba(255,255,255,.026);font:800 clamp(60px,10vw,140px)/1 "Space Grotesk",sans-serif;letter-spacing:-.08em;pointer-events:none}
+.contact .row{gap:14px;position:relative;z-index:1}
+.input,.field input,.msg-input-area textarea,.bubble-edit-area,.status-select,.priority-select{
+  background:#0b101b;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:12px;
+  padding:14px 15px;
+  outline:none;
+  font-family:"Manrope",sans-serif;
+  transition:border-color .18s,box-shadow .18s,background .18s;
+}
+.input:focus,.field input:focus,.msg-input-area textarea:focus,.bubble-edit-area:focus{border-color:rgba(118,135,255,.62);box-shadow:0 0 0 4px rgba(118,135,255,.08);background:#0d1320}
+.input::placeholder,.field input::placeholder,.msg-input-area textarea::placeholder{color:#647087}
+.contact textarea{min-height:150px;position:relative;z-index:1}
+.contact>div:last-child{position:relative;z-index:1}
+
+footer{padding:30px 0 54px;color:var(--text-dim);font-size:12px;border-top:1px solid var(--line);opacity:1}
+footer span{color:var(--text)}
+#back-top{bottom:24px;right:24px;width:44px;height:44px;border-radius:12px;background:var(--text);border:0;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+#back-top svg path{stroke:#0a0d14}
+#back-top:hover{filter:none;background:var(--accent)}
+
+/* Modal system */
+.modal-overlay{background:rgba(3,5,9,.78);backdrop-filter:blur(16px)}
+.modal{background:#0f1522;border:1px solid var(--line-strong);border-radius:22px;padding:30px;box-shadow:0 28px 90px rgba(0,0,0,.5)}
+.modal h2{font:700 24px/1.15 "Space Grotesk",sans-serif;letter-spacing:-.04em}
+.modal p.sub{color:var(--text-dim)}
+.modal-close{top:14px;right:14px;width:36px;height:36px;padding:0;border-radius:10px;background:rgba(255,255,255,.035);color:var(--text-dim)}
+.modal-close:hover{color:var(--text);background:rgba(118,135,255,.1)}
+.field label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim)}
+.modal-error{background:rgba(255,111,145,.08);border-color:rgba(255,111,145,.22);color:#ff9ab0;border-radius:11px}
+.modal-success{background:rgba(117,240,173,.07);border-color:rgba(117,240,173,.22);color:var(--green);border-radius:11px}
+.tab-row,.profile-tabs{background:#0a0f19;border:1px solid var(--line);border-radius:12px;padding:4px}
+.tab-btn,.profile-tab{border-radius:9px;color:var(--text-dim)}
+.tab-btn.active,.profile-tab.active{background:var(--surface-3);color:var(--text);box-shadow:none}
+.avatar-large{background:var(--surface-2);border-color:var(--line-strong);border-radius:20px}
+.avatar-large:hover{border-color:rgba(118,135,255,.62)}
+.emoji-grid{background:#0b101b;border-color:var(--line);border-radius:14px}
+.emoji-opt:hover{background:rgba(118,135,255,.1)}
+.emoji-opt.selected{background:rgba(118,135,255,.18);outline-color:var(--primary)}
+.twofa-digit{background:#0b101b;border-color:var(--line-strong);border-radius:12px}
+.twofa-digit:focus{border-color:var(--primary)}
+.twofa-info{background:rgba(118,135,255,.07);border-color:rgba(118,135,255,.2);color:#b8c1ff}
+.conn-item{background:rgba(255,255,255,.025);border-color:var(--line);border-radius:12px}
+.conn-icon{background:rgba(118,135,255,.08);border-color:rgba(118,135,255,.2)}
+.confirm-btn-cancel{background:transparent;border-color:var(--line-strong);color:var(--text-dim)}
+.confirm-btn-ok{background:var(--danger)}
+
+/* Messages page */
+#page-messages{background:#080b12}
+.msg-page-header{background:rgba(8,11,18,.84);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+.msg-page-header h1{font:700 20px/1 "Space Grotesk",sans-serif;letter-spacing:-.025em}
+.msg-back{border-color:var(--line-strong);color:var(--text-dim);border-radius:10px}
+.msg-back:hover{color:var(--text);border-color:rgba(118,135,255,.56)}
+.msg-layout{grid-template-columns:330px 1fr}
+.msg-sidebar{border-right:1px solid var(--line);background:#0c111c}
+.msg-sidebar-header{border-bottom:1px solid var(--line)}
+.msg-sidebar-header h3{font-family:"Space Grotesk",sans-serif}
+.thread-list{padding:10px}
+.thread-item{border-radius:12px;padding:12px;border:1px solid transparent}
+.thread-item:hover{background:rgba(118,135,255,.055)}
+.thread-item.active{background:rgba(118,135,255,.1);border-color:rgba(118,135,255,.22)}
+.thread-item.unread::before{background:var(--accent)}
+.thread-avatar,.msg-top-bar .t-avatar,.bubble-avatar{background:var(--surface-3);border-color:var(--line);color:#b8c1ff;border-radius:10px}
+.msg-main{background:#080c14}
+.msg-top-bar{border-bottom:1px solid var(--line);padding:13px 20px}
+.status-select,.priority-select{padding:7px 9px;font-size:11px}
+.pinned-bar{background:rgba(255,191,105,.055);border-bottom:1px solid rgba(255,191,105,.16);color:var(--orange)}
+.msg-body{padding:18px 22px}
+.date-sep::before,.date-sep::after{background:var(--line)}
+.bubble{background:#111827;border:1px solid var(--line);border-radius:4px 15px 15px 15px;color:var(--text)}
+.bubble.me{background:rgba(118,135,255,.17);border-color:rgba(118,135,255,.28);border-radius:15px 4px 15px 15px}
+.bubble.admin-bubble{background:rgba(255,191,105,.07);border-color:rgba(255,191,105,.18)}
+.bubble.note-bubble{background:rgba(100,229,232,.055);border-color:rgba(100,229,232,.2)}
+.bubble-quote{background:rgba(0,0,0,.18);border-left-color:var(--primary)}
+.reaction-pill{background:rgba(118,135,255,.08);border-color:rgba(118,135,255,.18)}
+.reaction-pill:hover,.reaction-pill.mine{background:rgba(118,135,255,.18);border-color:rgba(118,135,255,.38)}
+.emoji-picker,.bubble-actions{background:#151c2d;border-color:var(--line-strong)}
+.act-btn:hover{color:var(--accent);background:rgba(185,255,102,.08)}
+.admin-badge{background:rgba(255,191,105,.08);border-color:rgba(255,191,105,.2);color:var(--orange)}
+.quick-replies{border-top:1px solid var(--line)}
+.qr-btn{background:rgba(255,255,255,.03);border-color:var(--line);color:var(--text-dim)}
+.qr-btn:hover{background:rgba(118,135,255,.09);color:var(--text)}
+.note-toggle input[type=checkbox]{accent-color:var(--primary)}
+.msg-input-area{border-top:1px solid var(--line);background:#0b101a}
+.msg-send-btn{background:var(--text);color:#0a0d14;border:0;border-radius:11px}
+.msg-send-btn:hover{filter:none;background:var(--accent);transform:translateY(-1px)}
+.img-attach-btn{background:rgba(255,255,255,.035);border-color:var(--line);color:var(--text-dim);border-radius:11px}
+.img-attach-btn:hover{background:rgba(118,135,255,.1);color:#b8c1ff;border-color:rgba(118,135,255,.4)}
+.new-msg-btn{background:rgba(118,135,255,.06);border-color:rgba(118,135,255,.24);color:#b8c1ff;border-radius:11px}
+.new-msg-btn:hover{background:rgba(118,135,255,.13);border-color:rgba(118,135,255,.44)}
+
+/* Cursor and particles */
+@media(pointer:fine){*{cursor:auto!important}a,button,[role="button"],.chip-discord,.thread-item,.dropdown-item{cursor:pointer!important}}
+#cursor-dot,#cursor-ring{display:none!important}
+#particles-canvas{opacity:.23;mix-blend-mode:screen}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#283249;border:2px solid #080b12;border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:#3c4967}
+
+/* Responsive */
+@media(max-width:1180px){
+  nav a{padding:9px 7px;font-size:11px}
+  .nav .row{gap:8px}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(310px,.72fr);column-gap:42px}
+  .dservice{grid-column:span 6}
+}
+@media(max-width:1020px){
+  nav{display:none}
+  .hero{grid-template-columns:1fr;grid-template-areas:"badge" "title" "about" "profile" "actions";min-height:auto;row-gap:24px;padding-top:92px}
+  .profile{min-height:430px;max-width:none}
+  .hero>.grid{margin-top:0}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .game{grid-column:span 6}
+  .game:last-child{grid-column:span 12}
+  .service{grid-column:span 6}
+  .service:last-child{grid-column:span 12}
+  .pricing-grid{grid-template-columns:1fr;max-width:620px;margin:0 auto}
+  .pricing-card.featured,.pricing-card.featured:hover{transform:none}
+  .testi{grid-column:span 6}
+  .testi:last-child{grid-column:span 12}
+  .msg-layout{grid-template-columns:280px 1fr}
+}
+@media(max-width:700px){
+  .container{width:min(100% - 24px,1220px)}
+  header.nav{top:8px}
+  .nav .row{min-height:58px;border-radius:15px;padding:8px 9px 8px 12px}
+  .brand{font-size:12px}
+  .brand:before{width:34px;height:34px;border-radius:9px}
+  .btn-nav{padding:0 10px;min-height:36px}
+  #lang-toggle{min-height:36px;padding:0 9px}
+  .hero{padding:70px 0 54px}
+  .hero h1{font-size:clamp(46px,15vw,72px)}
+  .profile{min-height:390px;padding:24px;border-radius:22px}
+  .avatar{width:104px;height:104px;flex-basis:104px;border-radius:22px}
+  .name{font-size:29px}
+  .hero>.grid{grid-template-columns:1fr}
+  .hero>.grid .card{min-height:135px}
+  section{padding:70px 0}
+  section h2{font-size:42px}
+  .stat-grid{grid-template-columns:1fr}
+  .stat{min-height:155px}
+  .game,.game:last-child,.service,.service:last-child,.bot-card,.testi,.testi:last-child{grid-column:span 12}
+  .why-grid{grid-template-columns:1fr}
+  .dservice{grid-column:span 12}
+  .discord-cta{flex-direction:column;align-items:flex-start;padding:25px}
+  .discord-cta-actions{width:100%}
+  .discord-cta-actions .btn{flex:1}
+  .contact{padding:22px;border-radius:20px}
+  .contact .row{flex-direction:column}
+  .contact>div:last-child .btn{width:100%}
+  .testi-grid{grid-template-columns:1fr}
+  .msg-layout{grid-template-columns:1fr}
+  .msg-sidebar{display:none}
+  .msg-sidebar.mobile-open{display:block;position:fixed;inset:0;top:61px;z-index:20}
+}
+@media(max-width:480px){
+  .nav-auth .btn-nav.login{display:none}
+  .btn-nav.messages{font-size:0;width:38px;padding:0}
+  .btn-nav.messages:before{content:"💬";font-size:15px}
+  .hero h1{font-size:46px}
+  .available-badge{font-size:10px}
+  .profile{min-height:360px;padding:20px}
+  .profile:after{right:-120px}
+  .chips{max-height:88px;overflow:hidden}
+  section h2{font-size:36px}
+  .pricing-card{padding:22px 19px}
+  .modal{padding:26px 19px}
+  .twofa-code-wrap{gap:5px}
+  .twofa-digit{width:40px;height:50px}
+}
+
+</style>
 </head>
 <body>
 
   <div class="intro">
-    <h1><span class="typewriter"><span class="gradient">Welcome</span> — Portfolio</span></h1>
+    <h1><span class="typewriter"><span class="gradient">ZxeDev</span> / Portfolio</span></h1>
   </div>
 
   <div id="cursor-dot"></div>
@@ -672,7 +1204,7 @@
   <div id="main-content">
     <header class="nav">
       <div class="container row">
-        <div class="brand"><span class="badge-dot"></span><span><strong>Roblox</strong> Dev</span></div>
+        <div class="brand"><span class="badge-dot"></span><span>ZxeDev Studio</span></div>
         <nav>
           <a href="#stats" data-i18n="nav_stats">Stats</a>
           <a href="#games" data-i18n="nav_games">Games</a>
@@ -690,7 +1222,7 @@
 
     <section class="hero container" id="home">
       <div class="available-badge"><span class="dot-pulse"></span>Available for commissions</div>
-      <h1><em>Roblox Developer</em></h1>
+      <h1>Building <em>Roblox experiences</em> that feel finished.</h1>
       <div class="profile">
         <div class="avatar"><img src="https://image.noelshack.com/fichiers/2026/26/3/1782334193-1aca870e47f29b68a70398467e3245fb.jpg" alt="ZxeDev avatar"/></div>
         <div class="p-col">
@@ -716,10 +1248,10 @@
           <div class="last-online"><span class="dc-dot"></span><span id="last-online-text">Last seen on Discord: <b>today</b></span></div>
         </div>
       </div>
-      <p class="about">Im a <b>Roblox Developer</b> specialized in <em>scripting</em> and <em>3D Model</em>, with 1+ years of experience. I worked on games <b>Blox Voice</b>, <b>Mansion Life Tycoon</b> and <b>Kat X</b> and some others, totalizing <b>51M+</b> visits.</p>
+      <p class="about">Im a <b>Roblox Developer</b> specialized in <em>scripting</em> and <em>3D Model</em>, with 3+ years of experience. I worked on games <b>Blox Voice</b>, <b>Mansion Life Tycoon</b> and <b>One Shot Arena</b> and some others, totalizing <b>90M+</b> visits.</p>
       <div class="grid">
-        <article class="card"><h3>Games I've Worked On</h3><p>Discover detailed project sheets, figures and responsibilities.</p><a class="btn" href="#games">View My games →</a></article>
-        <article class="card"><h3>My Work Portfolio</h3><p>UI, gameplay systems, internal tools and video demonstrations.</p><a class="btn secondary" href="#portfolio">Explore the portfolio</a></article>
+        <article class="card"><h3>Selected Game Work</h3><p>Discover detailed project sheets, figures and responsibilities.</p><a class="btn" href="#games">Explore projects →</a></article>
+        <article class="card"><h3>Systems & Interfaces</h3><p>UI, gameplay systems, internal tools and video demonstrations.</p><a class="btn secondary" href="#portfolio">View capabilities</a></article>
       </div>
     </section>
 
@@ -733,7 +1265,7 @@
     </section>
 
     <section id="games" class="container">
-      <h2>Featured games</h2>
+      <h2>Selected games</h2>
       <div class="pill-row"><span class="chip">Game Development</span><span class="chip">VFX & Effect</span><span class="chip">Optimisation Of Server</span><span class="chip">UI Responsive</span></div>
       <div class="cards-3">
         <article class="game"><div class="thumb"><img src="https://image.noelshack.com/fichiers/2026/26/3/1782333917-design-sans-titre-5.jpg" alt="Blox Voice"/></div><div class="body"><h3>Blox Voice</h3><p>UI, Scripting, Builds, Everythings</p><div class="meta"><span class="tag">Lead Developer</span><span class="tag">Scripting</span><span class="tag">Owner</span></div></div></article>
@@ -743,7 +1275,7 @@
     </section>
 
     <section id="portfolio" class="container">
-      <h2>UI &amp; System</h2>
+      <h2>Systems &amp; interfaces</h2>
       <div class="cards-3">
         <article class="service"><h4>"glass / neon" interfaces</h4><p>HUD currency displays, help/admin panels, responsive shops, refined transitions.</p></article>
         <article class="service"><h4>Gameplay Modules</h4><p>Inventories, quests, professions, progression, light anti-cheat.</p></article>
@@ -752,7 +1284,7 @@
     </section>
 
     <section id="services" class="container">
-      <h2>What I propose</h2>
+      <h2>What I build</h2>
       <div class="cards-3">
         <article class="service"><h4>Game Scripting (Lua)</h4><p>Clear server/client architecture, modular patterns, stable performance.</p></article>
         <article class="service"><h4>UI/UX Premium</h4><p>Modern design, subtle animation, mobile/PC responsiveness, basic accessibility.</p></article>
@@ -850,13 +1382,13 @@
       <p style="text-align:center;color:var(--text-dim);margin:-10px 0 28px;font-size:15px;">Real feedback from Discord &amp; Roblox collaborators.</p>
       <div class="testi-grid">
         <article class="testi"><div class="testi-stars"><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg></div><p class="testi-text">Delivered a full economy system in 3 days. Clean code, great communication, will definitely work again.</p><div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ff5555"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#ff5555" opacity=".5"/></svg></div><div><div class="testi-name">xBlaze_Dev</div><div class="testi-role">Game Developer</div></div><span class="testi-platform">Discord</span></div></article>
-        <article class="testi"><div class="testi-stars"><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg></div><p class="testi-text">The UI he made for our tycoon game is insane. Super clean, responsive, and exactly what we wanted.</p><div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#5865F2"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#5865F2" opacity=".5"/></svg></div><div><div class="testi-name">NovaStudio_RBX</div><div class="testi-role">Studio Owner</div></div><span class="testi-platform">Roblox</span></div></article>
+        <article class="testi"><div class="testi-stars"><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg></div><p class="testi-text">The UI/Scripts he made for our FPS game is insane. Super clean, responsive, and exactly what we wanted.</p><div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#5865F2"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#5865F2" opacity=".5"/></svg></div><div><div class="testi-name">Versatile Intelligence</div><div class="testi-role">Studio Owner</div></div><span class="testi-platform">Roblox</span></div></article>
         <article class="testi"><div class="testi-stars"><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#faa61a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="#3a3a3a"><path d="M12 2l2.9 5.88 6.1.89-4.4 4.29 1.04 6.07L12 17l-5.64 2.13 1.04-6.07L3 8.77l6.1-.89L12 2Z"/></svg></div><p class="testi-text">Built our moderation bot from scratch. Solid work, good price, and he fixed a bug super fast after delivery.</p><div class="testi-author"><div class="testi-avatar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#36c288"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" fill="#36c288" opacity=".5"/></svg></div><div><div class="testi-name">MrCryptix</div><div class="testi-role">Server Owner</div></div><span class="testi-platform">Discord</span></div></article>
       </div>
     </section>
 
     <section id="contact" class="container">
-      <h2>Contact me</h2>
+      <h2>Let’s build something great.</h2>
       <div class="contact">
         <div class="row">
           <input id="name" class="input" type="text" placeholder="Your Username"/>
@@ -1699,7 +2231,7 @@
 
     (function(){const dot=document.getElementById('cursor-dot');const ring=document.getElementById('cursor-ring');if(!dot||!ring||!window.matchMedia('(pointer:fine)').matches)return;let mx=-200,my=-200,rx=-200,ry=-200;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function lerpRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lerpRing);})();document.addEventListener('mousedown',()=>{dot.classList.add('clicking');ring.classList.add('clicking');});document.addEventListener('mouseup',()=>{dot.classList.remove('clicking');ring.classList.remove('clicking');});document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.btn,.chip,.bot-card,.game,.pricing-card,.testi,.why-card,.service,.dservice,.thread-item,.dropdown-item')){dot.classList.add('hovering');ring.classList.add('hovering');}else{dot.classList.remove('hovering');ring.classList.remove('hovering');}});})();
 
-    (function(){const canvas=document.getElementById('particles-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,particles=[];const COLORS=['rgba(255,85,85,','rgba(224,48,48,','rgba(255,120,80,','rgba(88,101,242,'];function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}window.addEventListener('resize',resize,{passive:true});resize();function Particle(){this.reset();}Particle.prototype.reset=function(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.6+.4;this.vx=(Math.random()-.5)*.35;this.vy=-Math.random()*.4-.1;this.alpha=Math.random()*.5+.1;this.color=COLORS[Math.floor(Math.random()*COLORS.length)];};Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;this.alpha-=.0008;if(this.y<-10||this.alpha<=0)this.reset();};Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color+this.alpha+')';ctx.fill();};for(let i=0;i<90;i++){const p=new Particle();p.y=Math.random()*H;particles.push(p);}(function frame(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(frame);})();})();
+    (function(){const canvas=document.getElementById('particles-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,particles=[];const COLORS=['rgba(118,135,255,','rgba(100,229,232,','rgba(185,255,102,','rgba(120,137,255,'];function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}window.addEventListener('resize',resize,{passive:true});resize();function Particle(){this.reset();}Particle.prototype.reset=function(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.6+.4;this.vx=(Math.random()-.5)*.35;this.vy=-Math.random()*.4-.1;this.alpha=Math.random()*.5+.1;this.color=COLORS[Math.floor(Math.random()*COLORS.length)];};Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;this.alpha-=.0008;if(this.y<-10||this.alpha<=0)this.reset();};Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color+this.alpha+')';ctx.fill();};for(let i=0;i<90;i++){const p=new Particle();p.y=Math.random()*H;particles.push(p);}(function frame(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(frame);})();})();
 
     function initLangToggle(){
       const btn=document.getElementById('lang-toggle');if(!btn)return;
