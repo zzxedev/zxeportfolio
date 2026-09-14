@@ -274,19 +274,6 @@
     .step h4{font-size:14px;margin-bottom:7px}
     .step p{font-size:11px;color:#7f7f85;margin:0}
 
-    /* PRICING */
-    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .price-card{position:relative;border:1px solid var(--line);background:#0e0e0e;border-radius:22px;padding:26px;display:flex;flex-direction:column;min-height:475px;transition:.25s ease;overflow:hidden}
-    .price-card:hover{transform:translateY(-4px);border-color:rgba(239,43,45,.24)}
-    .price-card.featured{border-color:rgba(239,43,45,.35);background:linear-gradient(180deg,rgba(239,43,45,.085),#0e0e0e 32%)}
-    .popular{position:absolute;right:18px;top:18px;background:var(--red);color:white;border-radius:999px;padding:5px 9px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
-    .plan{font:700 18px/1 "Space Grotesk";margin-bottom:14px}
-    .price{font:700 38px/1 "Space Grotesk";letter-spacing:-.05em;margin-bottom:8px}
-    .price small{font:600 12px/1.3 "Manrope";color:#85858b;letter-spacing:0}
-    .price-desc{font-size:12px;color:#88888e;min-height:52px;margin-bottom:20px}
-    .features{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:10px;flex:1}
-    .features li{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#b0b0b5}
-    .check{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:rgba(239,43,45,.1);border:1px solid rgba(239,43,45,.18);color:#ff6769;font-size:10px;flex:0 0 17px;margin-top:1px}
 
     /* TESTIMONIALS */
     .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -340,8 +327,6 @@
       .process{grid-template-columns:repeat(2,1fr)}
       .step:nth-child(3){border-left:0;border-top:1px solid var(--line)}
       .step:nth-child(4){border-top:1px solid var(--line)}
-      .pricing-grid{grid-template-columns:1fr;max-width:560px;margin:auto}
-      .price-card{min-height:auto}
       .review-grid{grid-template-columns:1fr 1fr}
       .review:last-child{grid-column:1/-1}
       .contact-card{grid-template-columns:1fr;gap:30px}
@@ -423,7 +408,6 @@
         <a href="#work" data-i18n="nav_work">Work</a>
         <a href="#services" data-i18n="nav_services">Services</a>
         <a href="#bots" data-i18n="nav_bots">Discord Bots</a>
-        <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
         <a href="#reviews" data-i18n="nav_reviews">Reviews</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
@@ -666,63 +650,10 @@
       </div>
     </section>
 
-    <section class="section" id="pricing">
-      <div class="container">
-        <div class="section-head reveal">
-          <div><div class="eyebrow">05 / Pricing</div><h2 data-i18n="pricing_title">Straightforward starting points.</h2></div>
-          <p class="section-lead" data-i18n="pricing_lead">Prices depend on complexity. These are useful starting ranges before a custom quote.</p>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="price-card reveal">
-            <div class="plan">Starter</div>
-            <div class="price">1500 <small>R$ / ~17$</small></div>
-            <p class="price-desc" data-i18n="starter_desc">For a small feature, focused system or simple Discord bot.</p>
-            <ul class="features">
-              <li><span class="check">✓</span><span data-i18n="starter_f1">1 core feature / system</span></li>
-              <li><span class="check">✓</span><span data-i18n="starter_f2">Basic UI or command set</span></li>
-              <li><span class="check">✓</span><span data-i18n="starter_f3">Approx. 2-day target</span></li>
-              <li><span class="check">✓</span><span data-i18n="starter_f4">1 revision included</span></li>
-            </ul>
-            <a class="btn secondary" href="https://discord.gg/dPR97m2EYE" target="_blank" rel="noopener" data-i18n="get_started">Get started</a>
-          </article>
-
-          <article class="price-card featured reveal delay-1">
-            <span class="popular" data-i18n="popular">Most popular</span>
-            <div class="plan">Pro</div>
-            <div class="price">5 000 <small>R$ / ~50$</small></div>
-            <p class="price-desc" data-i18n="pro_desc">For complete systems, rich UI, full bots or multi-feature work.</p>
-            <ul class="features">
-              <li><span class="check">✓</span><span data-i18n="pro_f1">Up to 5 systems / features</span></li>
-              <li><span class="check">✓</span><span data-i18n="pro_f2">Premium UI design</span></li>
-              <li><span class="check">✓</span><span data-i18n="pro_f3">Approx. 5-day target</span></li>
-              <li><span class="check">✓</span><span data-i18n="pro_f4">3 revisions included</span></li>
-              <li><span class="check">✓</span><span data-i18n="pro_f5">Performance optimization</span></li>
-            </ul>
-            <a class="btn" href="https://discord.gg/dPR97m2EYE" target="_blank" rel="noopener" data-i18n="get_started">Get started</a>
-          </article>
-
-          <article class="price-card reveal delay-2">
-            <div class="plan">Custom</div>
-            <div class="price">DM <small data-i18n="quote">for quote</small></div>
-            <p class="price-desc" data-i18n="custom_desc">For full games, large bots or long-term collaboration.</p>
-            <ul class="features">
-              <li><span class="check">✓</span><span data-i18n="custom_f1">Custom scope</span></li>
-              <li><span class="check">✓</span><span data-i18n="custom_f2">Full game / full bot development</span></li>
-              <li><span class="check">✓</span><span data-i18n="custom_f3">Negotiated deadline</span></li>
-              <li><span class="check">✓</span><span data-i18n="custom_f4">Revision plan adapted to project</span></li>
-              <li><span class="check">✓</span><span data-i18n="custom_f5">Long-term support possible</span></li>
-            </ul>
-            <a class="btn secondary" href="https://discord.gg/dPR97m2EYE" target="_blank" rel="noopener" data-i18n="contact_me">Contact me</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="reviews">
       <div class="container">
         <div class="section-head reveal">
-          <div><div class="eyebrow">06 / Feedback</div><h2 data-i18n="reviews_title">What collaborators say.</h2></div>
+          <div><div class="eyebrow">05 / Feedback</div><h2 data-i18n="reviews_title">What collaborators say.</h2></div>
           <p class="section-lead" data-i18n="reviews_lead">Feedback from previous Discord and Roblox collaborations.</p>
         </div>
 
@@ -738,7 +669,7 @@
       <div class="container">
         <div class="contact-card reveal">
           <div class="contact-copy">
-            <div class="eyebrow">07 / Contact</div>
+            <div class="eyebrow">06 / Contact</div>
             <h2 data-i18n="contact_title">Have a project?<br><span class="red">Let's build it.</span></h2>
             <p data-i18n="contact_desc">Send the scope, references and deadline. I’ll have enough context to understand what you need before we discuss the details.</p>
             <div class="contact-links">
@@ -962,25 +893,23 @@
       // Lightweight FR / EN translation
       const T = {
         en:{
-          nav_work:'Portfolio',nav_services:'Services',nav_bots:'Discord Bots',nav_pricing:'Pricing',nav_reviews:'Reviews',nav_contact:'Contact',nav_cta:"Let's talk",
+          nav_work:'Portfolio',nav_services:'Services',nav_bots:'Discord Bots',nav_reviews:'Reviews',nav_contact:'Contact',nav_cta:"Let's talk",
           available:'Available for commissions',hero_1:'I build',hero_2:'Roblox experiences',hero_3:'that feel finished.',hero_copy:'Roblox developer specialized in <strong>scripting, UI/UX, 3D assets and optimization</strong>. 3+ years of experience and contributions across projects totaling 110M+ visits.',view_work:'View selected work',contact_discord:'Contact on Discord',role:'Roblox Developer & Digital Creator',years:'Years',games:'Games',visits:'Visits',
           stat1_label:'Contributed visits',stat2_label:'Roblox followers',stat3_label:'Games worked on',stat4_label:'Group members',
           work_title:'Portfolio, organized by <span class="red">discipline.</span>',work_lead:'A visual selection of interfaces, Roblox environments and game-ready 3D assets.',filter_all:'All <span>12</span>',portfolio_hint:'Click a visual to enlarge it',gui_title:'GUI / UI Design',gui_desc:'Menus, HUDs, shops and in-world interfaces designed for Roblox experiences.',build_title:'Roblox Builds',build_desc:'Environment design, hubs and playable spaces built directly for Roblox.',model_title:'3D Modeling',model_desc:'Game-ready props and weapons modeled in Blender for integration into Roblox projects.',gui_1:'Developer Tags & Overhead UI',gui_2:'Robux Shop Interface',gui_3:'Simulator HUD & Inventory',gui_4:'Weapon Shop Interface',build_1:'Adventure Park Environment',build_2:'Portal Hub',build_3:'Environment',build_4:'Shop Stand & Booth Area',model_1:'Bow & Arrow',model_2:'Stylized Sniper Rifle',model_3:'Assault Rifle',model_4:'Minecart Prop',
           services_title:'From idea to a <span class="red">production-ready</span> system.',services_lead:'I focus on useful work that makes a game feel cleaner, faster and more complete — not just isolated scripts.',cap1_title:'Gameplay Scripting',cap1_desc:'Inventories, shops, progression, quests, vehicles, tools, data systems, NPC logic and secure server/client architecture.',cap2_title:'UI / UX Systems',cap2_desc:'Responsive interfaces for desktop and mobile, polished transitions, HUDs, menus, shops and feedback animations.',cap3_title:'Optimization & Cleanup',cap3_desc:'Profiling, reducing unnecessary work, stabilizing long sessions and cleaning up code that has become difficult to maintain.',cap4_title:'3D Assets & Integration',cap4_desc:'Low-poly props, game-ready assets, Roblox Studio integration and visual consistency between your world and systems.',cap5_title:'Developer Tools',cap5_desc:'Admin panels, debugging utilities, analytics hooks, modular configuration and tools that make future updates easier.',cap6_title:'Full Feature Delivery',cap6_desc:'I can handle a feature end-to-end: architecture, implementation, UI, polish, testing, revisions and final integration.',
           bots_title:'Custom Discord bots, without the <span class="red">template feel.</span>',bots_lead:'Custom Node.js / discord.js bots for communities, studios and game servers — designed around your actual workflow.',bot_intro_title:'One bot.<br>Exactly your rules.',bot_intro_desc:'Moderation, tickets, economy, leveling, verification, logs, anti-spam, anti-raid and custom commands can all live inside one coherent system.',bot_f1:'Moderation Systems',bot_f1d:'Warnings, mutes, bans, logs, anti-spam and anti-raid protection.',bot_f2:'Ticket Systems',bot_f2d:'Clean support flows with categories, transcripts and staff tools.',bot_f3:'Economy & Leveling',bot_f3d:'Balances, rewards, ranks, leaderboards and configurable progression.',bot_f4:'Welcome & Auto-Roles',bot_f4d:'Verification, onboarding, role assignment and personalized welcomes.',
           why_title:'Professional enough to ship. <span class="red">Simple enough to maintain.</span>',why_lead:'A good delivery is not only about “it works”. It should also be understandable, testable and easy to improve later.',why1_t:'Fast delivery',why1_d:'Clear scope, practical decisions and focused implementation without unnecessary complexity.',why2_t:'Clean architecture',why2_d:'Modular code, sensible configuration and a structure you can continue using after delivery.',why3_t:'Real project experience',why3_d:'Experience with live Roblox projects helps prioritize performance, player feedback and maintainability.',why4_t:'Communication',why4_d:'Regular updates, quick clarification when needed and revisions when something needs adjustment.',step1_t:'Define the feature',step1_d:'Goal, references, constraints, platforms and expected result.',step2_t:'Implement cleanly',step2_d:'Core architecture first, then UI, feedback and edge cases.',step3_t:'Test & polish',step3_d:'Desktop/mobile checks, gameplay testing and final optimization.',step4_t:'Integrate & revise',step4_d:'Final integration, requested revisions and clean handoff.',
-          pricing_title:'Straightforward starting points.',pricing_lead:'Prices depend on complexity. These are useful starting ranges before a custom quote.',starter_desc:'For a small feature, focused system or simple Discord bot.',starter_f1:'1 core feature / system',starter_f2:'Basic UI or command set',starter_f3:'Approx. 2-day target',starter_f4:'1 revision included',popular:'Most popular',pro_desc:'For complete systems, rich UI, full bots or multi-feature work.',pro_f1:'Up to 5 systems / features',pro_f2:'Premium UI design',pro_f3:'Approx. 5-day target',pro_f4:'3 revisions included',pro_f5:'Performance optimization',quote:'for quote',custom_desc:'For full games, large bots or long-term collaboration.',custom_f1:'Custom scope',custom_f2:'Full game / full bot development',custom_f3:'Negotiated deadline',custom_f4:'Revision plan adapted to project',custom_f5:'Long-term support possible',get_started:'Get started',contact_me:'Contact me',
           reviews_title:'What collaborators say.',reviews_lead:'Feedback from previous Discord and Roblox collaborations.',contact_title:'Have a project?<br><span class="red">Let\'s build it.</span>',contact_desc:'Send the scope, references and deadline. I’ll have enough context to understand what you need before we discuss the details.',open_discord:'Open Discord',copy_discord:'Copy Discord link',send_email:'Prepare email',form_note:'No account, login or message database is used. This button simply opens your email application.',footer_text:'Roblox Developer & Discord Bot Developer.'
         },
         fr:{
-          nav_work:'Portfolio',nav_services:'Services',nav_bots:'Bots Discord',nav_pricing:'Tarifs',nav_reviews:'Avis',nav_contact:'Contact',nav_cta:'Me contacter',
+          nav_work:'Portfolio',nav_services:'Services',nav_bots:'Bots Discord',nav_reviews:'Avis',nav_contact:'Contact',nav_cta:'Me contacter',
           available:'Disponible pour des commissions',hero_1:'Je crée des',hero_2:'expériences Roblox',hero_3:'qui semblent abouties.',hero_copy:'Développeur Roblox spécialisé en <strong>scripting, UI/UX, assets 3D et optimisation</strong>. Plus de 3 ans d’expérience et des contributions sur des projets totalisant plus de 110M+ de visites.',view_work:'Voir mes projets',contact_discord:'Me contacter sur Discord',role:'Développeur Roblox & Créateur digital',years:'Années',games:'Jeux',visits:'Visites',
           stat1_label:'Visites cumulées',stat2_label:'Abonnés Roblox',stat3_label:'Jeux développés',stat4_label:'Membres de groupes',
           work_title:'Portfolio classé par <span class="red">discipline.</span>',work_lead:'Une sélection visuelle de mes interfaces, builds Roblox et assets 3D prêts à intégrer.',filter_all:'Tout <span>12</span>',portfolio_hint:'Clique sur un visuel pour l’agrandir',gui_title:'GUI / UI Design',gui_desc:'Menus, HUD, shops et interfaces intégrées conçus pour des expériences Roblox.',build_title:'Builds Roblox',build_desc:'Environnements, hubs et espaces de jeu construits directement pour Roblox.',model_title:'Modélisation 3D',model_desc:'Props et armes game-ready modélisés sur Blender pour intégration dans Roblox.',gui_1:'Tags développeur & UI au-dessus du joueur',gui_2:'Interface Robux Shop',gui_3:'HUD simulateur & inventaire',gui_4:'Interface Weapon Shop',build_1:'Environnement Adventure Park',build_2:'Hub de portails',build_3:'Environment',build_4:'Zone shop & stands',model_1:'Arc & flèche',model_2:'Fusil de précision stylisé',model_3:'Fusil d’assaut',model_4:'Wagonnet / Minecart',
           services_title:'De l’idée à un système <span class="red">prêt à publier.</span>',services_lead:'Je privilégie les éléments qui rendent un jeu plus propre, plus rapide et plus complet — pas simplement des scripts isolés.',cap1_title:'Scripting Gameplay',cap1_desc:'Inventaires, shops, progression, quêtes, véhicules, tools, sauvegarde, logique NPC et architecture client/serveur sécurisée.',cap2_title:'Systèmes UI / UX',cap2_desc:'Interfaces responsive PC/mobile, transitions propres, HUD, menus, shops et animations de feedback.',cap3_title:'Optimisation & Nettoyage',cap3_desc:'Profiling, réduction des calculs inutiles, stabilité des longues sessions et remise au propre de code difficile à maintenir.',cap4_title:'Assets 3D & Intégration',cap4_desc:'Props low-poly, assets prêts pour le jeu, intégration Roblox Studio et cohérence visuelle avec le reste du projet.',cap5_title:'Outils Développeur',cap5_desc:'Panneaux admin, outils de debug, analytics, configurations modulaires et outils facilitant les futures mises à jour.',cap6_title:'Fonctionnalité complète',cap6_desc:'Je peux gérer une fonctionnalité de A à Z : architecture, implémentation, UI, polish, tests, révisions et intégration.',
           bots_title:'Des bots Discord custom, sans effet <span class="red">template.</span>',bots_lead:'Bots Node.js / discord.js sur mesure pour communautés, studios et serveurs de jeux — conçus autour de ton fonctionnement réel.',bot_intro_title:'Un bot.<br>Tes propres règles.',bot_intro_desc:'Modération, tickets, économie, niveaux, vérification, logs, anti-spam, anti-raid et commandes personnalisées peuvent vivre dans un seul système cohérent.',bot_f1:'Systèmes de modération',bot_f1d:'Warnings, mutes, bans, logs, anti-spam et protection anti-raid.',bot_f2:'Systèmes de tickets',bot_f2d:'Support propre avec catégories, transcripts et outils pour le staff.',bot_f3:'Économie & niveaux',bot_f3d:'Soldes, récompenses, rangs, leaderboards et progression configurable.',bot_f4:'Accueil & auto-rôles',bot_f4d:'Vérification, onboarding, attribution de rôles et messages personnalisés.',
           why_title:'Assez pro pour publier. <span class="red">Assez simple pour maintenir.</span>',why_lead:'Une bonne livraison ne doit pas seulement fonctionner : elle doit aussi être compréhensible, testable et facile à améliorer.',why1_t:'Livraison rapide',why1_d:'Un scope clair, des décisions pratiques et une implémentation ciblée sans complexité inutile.',why2_t:'Architecture propre',why2_d:'Code modulaire, configuration logique et structure que tu peux continuer à utiliser après livraison.',why3_t:'Expérience concrète',why3_d:'L’expérience sur des projets Roblox réels aide à prioriser performance, feedback joueur et maintenabilité.',why4_t:'Communication',why4_d:'Mises à jour régulières, clarification rapide si besoin et révisions lorsqu’un point doit être ajusté.',step1_t:'Définir la fonctionnalité',step1_d:'Objectif, références, contraintes, plateformes et résultat attendu.',step2_t:'Développer proprement',step2_d:'Architecture principale, puis UI, feedback et cas limites.',step3_t:'Tester & peaufiner',step3_d:'Tests PC/mobile, gameplay et optimisation finale.',step4_t:'Intégrer & réviser',step4_d:'Intégration finale, révisions demandées et livraison propre.',
-          pricing_title:'Des bases tarifaires simples.',pricing_lead:'Le prix dépend de la complexité. Ces montants servent de repères avant un devis personnalisé.',starter_desc:'Pour une petite fonctionnalité, un système ciblé ou un bot Discord simple.',starter_f1:'1 fonctionnalité / système principal',starter_f2:'UI basique ou ensemble de commandes',starter_f3:'Objectif d’environ 2 jours',starter_f4:'1 révision incluse',popular:'Le plus choisi',pro_desc:'Pour des systèmes complets, une UI riche, un bot complet ou plusieurs fonctionnalités.',pro_f1:'Jusqu’à 5 systèmes / fonctionnalités',pro_f2:'Design UI premium',pro_f3:'Objectif d’environ 5 jours',pro_f4:'3 révisions incluses',pro_f5:'Optimisation des performances',quote:'sur devis',custom_desc:'Pour un jeu complet, un gros bot ou une collaboration longue durée.',custom_f1:'Scope personnalisé',custom_f2:'Développement jeu / bot complet',custom_f3:'Deadline négociée',custom_f4:'Plan de révisions adapté au projet',custom_f5:'Support long terme possible',get_started:'Commencer',contact_me:'Me contacter',
           reviews_title:'Ce qu’en disent mes collaborateurs.',reviews_lead:'Retours issus de précédentes collaborations Discord et Roblox.',contact_title:'Un projet en tête ?<br><span class="red">Construisons-le.</span>',contact_desc:'Envoie le scope, tes références et la deadline. J’aurai assez de contexte pour comprendre ton besoin avant qu’on discute des détails.',open_discord:'Ouvrir Discord',copy_discord:'Copier le lien Discord',send_email:'Préparer l’e-mail',form_note:'Aucun compte, login ou base de messages n’est utilisé. Ce bouton ouvre simplement ton application e-mail.',footer_text:'Développeur Roblox & Développeur de bots Discord.'
         }
       };
